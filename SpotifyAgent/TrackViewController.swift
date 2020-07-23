@@ -35,6 +35,7 @@ class TrackViewController: NSViewController {
                 print("Self is nil")
                 return
             }
+            self.renewApplicationState()
             if self.representedObject == nil && self.isApplicationRunning {
                 self.renewInformation()
             }
@@ -50,20 +51,12 @@ class TrackViewController: NSViewController {
         } else {
             timerApplicationRunning?.fire()
         }
-        
         observer = self.observe(\.isApplicationRunning, changeHandler: { [weak self] (_, _) in
             guard let self = self else {
                 return
             }
             if self.isApplicationRunning {
-                self.startMonitoringApplication()
                 self.isApplicationLaunching = false
-                self.timerApplicationRunning?.invalidate()
-            } else {
-                self.timerRenewInformation?.invalidate()
-                if let timer = self.timerApplicationRunning, !timer.isValid {
-                    self.timerApplicationRunning?.fire()
-                }
             }
         })
     }
@@ -173,7 +166,9 @@ class TrackViewController: NSViewController {
     
     @IBAction func runApplicationButtonPushed(_ sender: Any) {
         isApplicationLaunching = true
-        runAppleScript(withName: runApplication, successBlock: nil)
+        DispatchQueue.global(qos: .default).async { [weak self] in
+            self?.runAppleScript(withName: runApplication, successBlock: nil)
+        }
     }
 }
 
