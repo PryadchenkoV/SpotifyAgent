@@ -61,6 +61,10 @@ class TrackViewController: NSViewController {
         })
     }
     
+    deinit {
+        observer?.invalidate()
+    }
+    
     func startMonitoringApplication() {
         timerRenewInformation?.fire()
         
