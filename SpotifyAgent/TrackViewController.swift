@@ -11,6 +11,8 @@ import AVFoundation
 
 class TrackViewController: NSViewController {
     
+    @IBOutlet var popoverMenu: NSMenu!
+    
     @objc dynamic var isTrackPaused = true
     @objc dynamic var isApplicationRunning = false
     @objc dynamic var isApplicationLaunching = false
@@ -176,6 +178,12 @@ class TrackViewController: NSViewController {
         isApplicationLaunching = true
         DispatchQueue.global(qos: .default).async { [weak self] in
             self?.runAppleScript(withName: runApplication, successBlock: nil)
+        }
+    }
+    
+    @IBAction func buttonForDropDownMenuPushed(_ sender: NSButton) {
+        if let event = NSApplication.shared.currentEvent {
+            NSMenu.popUpContextMenu(sender.menu!, with: event, for: sender)
         }
     }
 }
