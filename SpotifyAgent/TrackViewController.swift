@@ -35,7 +35,6 @@ class TrackViewController: NSViewController {
                 print("Self is nil")
                 return
             }
-            self.renewApplicationState()
             if self.representedObject == nil && self.isApplicationRunning {
                 self.renewInformation()
             }

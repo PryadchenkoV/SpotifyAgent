@@ -1,27 +1,25 @@
 {
   "images" : [
     {
-      "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "icons8-частота-выборки-16.png",
+      "size" : "16x16",
       "scale" : "1x"
     },
     {
-      "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "icons8-частота-выборки-32.png",
+      "size" : "16x16",
       "scale" : "2x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "icons8-частота-выборки-33.png",
+      "filename" : "App_icon_32.png",
       "scale" : "1x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "icons8-частота-выборки-64.png",
+      "filename" : "App_icon_64.png",
       "scale" : "2x"
     },
     {

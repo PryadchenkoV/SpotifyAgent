@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "mac",
-      "filename" : "icons8-частота-выборки-32.png",
+      "filename" : "App_icon_32.png",
       "scale" : "1x"
     },
     {
       "idiom" : "mac",
-      "filename" : "icons8-частота-выборки-64.png",
+      "filename" : "App_icon_64.png",
       "scale" : "2x"
     }
   ],
