@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  SpotifyAgent
+
+  Created by Work on 23/07/2020.
+  Copyright © 2020 Work. All rights reserved.
+*/
+NSAppleEventsUsageDescription = "To access information from Spotify app";

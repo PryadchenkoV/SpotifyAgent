@@ -33,7 +33,7 @@
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>To get tracks from Spotify</string>
+	<string>Tést</string>
 	<key>LSUIElement</key>
 	<true/>
 </dict>

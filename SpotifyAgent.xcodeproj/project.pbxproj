@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		964A476024C9C7DD006EF187 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 964A475F24C9C7DD006EF187 /* InfoPlist.strings */; };
 		96A2A4F724C0612F009F38B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2A4F624C0612F009F38B7 /* AppDelegate.swift */; };
 		96A2A4F924C0612F009F38B7 /* TrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2A4F824C0612F009F38B7 /* TrackViewController.swift */; };
 		96A2A4FB24C06130009F38B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96A2A4FA24C06130009F38B7 /* Assets.xcassets */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		964A475824C9A78B006EF187 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		964A475F24C9C7DD006EF187 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		96A2A4F324C0612F009F38B7 /* SpotifyAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96A2A4F624C0612F009F38B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96A2A4F824C0612F009F38B7 /* TrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 				96A2A4FC24C06130009F38B7 /* Main.storyboard */,
 				96A2A4FF24C06130009F38B7 /* Info.plist */,
 				96A2A50024C06130009F38B7 /* SpotifyAgent.entitlements */,
+				964A475F24C9C7DD006EF187 /* InfoPlist.strings */,
 			);
 			path = SpotifyAgent;
 			sourceTree = "<group>";
@@ -128,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96A2A4FB24C06130009F38B7 /* Assets.xcassets in Resources */,
+				964A476024C9C7DD006EF187 /* InfoPlist.strings in Resources */,
 				96A2A4FE24C06130009F38B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +158,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				96A2A4FD24C06130009F38B7 /* Base */,
+				964A475824C9A78B006EF187 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -164,6 +170,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -224,6 +231,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

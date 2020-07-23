@@ -10,7 +10,7 @@ import Cocoa
 import AVFoundation
 
 class TrackViewController: NSViewController {
-
+    
     @objc dynamic var isTrackPaused = true
     @objc dynamic var isApplicationRunning = false
     @objc dynamic var isApplicationLaunching = false
