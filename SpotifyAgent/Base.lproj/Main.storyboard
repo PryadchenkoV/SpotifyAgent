@@ -846,20 +846,9 @@
                                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="image" id="OZp-MY-LBN"/>
                                                 </connections>
                                             </imageView>
-                                            <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="fsa-It-vpI">
-                                                <rect key="frame" x="106" y="74" width="38" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Track" id="hlg-aM-wDG">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                                <connections>
-                                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="representedObject.name" id="D7c-Nj-Y8u"/>
-                                                </connections>
-                                            </textField>
-                                            <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zM9-iP-98m">
-                                                <rect key="frame" x="103" y="48" width="45" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="Author" id="2qO-m8-Dc2">
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="zM9-iP-98m">
+                                                <rect key="frame" x="8" y="48" width="234" height="20"/>
+                                                <textFieldCell key="cell" alignment="center" title="Author" id="2qO-m8-Dc2">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -964,17 +953,44 @@
                                                     <constraint firstAttribute="bottom" secondItem="Kgl-50-Qep" secondAttribute="bottom" id="xAA-Js-cIs"/>
                                                 </constraints>
                                             </customView>
+                                            <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="58P-QP-Ogn">
+                                                <rect key="frame" x="109" y="148" width="32" height="32"/>
+                                                <connections>
+                                                    <binding destination="XfG-lQ-9wD" name="animate" keyPath="isImageLoading" id="j24-Mf-naA"/>
+                                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isImageLoading" id="4Eg-Z0-nYe">
+                                                        <dictionary key="options">
+                                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                </connections>
+                                            </progressIndicator>
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="KIt-dd-gqA">
+                                                <rect key="frame" x="8" y="76" width="234" height="16"/>
+                                                <textFieldCell key="cell" selectable="YES" alignment="center" title="Multiline Label" id="NMz-rz-DGC">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="representedObject.name" id="Le0-eJ-9an"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="fsa-It-vpI" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="5H8-H6-wNh"/>
+                                            <constraint firstItem="zM9-iP-98m" firstAttribute="top" secondItem="KIt-dd-gqA" secondAttribute="bottom" constant="8" id="2xI-gh-YSS"/>
                                             <constraint firstItem="xlP-ui-12i" firstAttribute="top" secondItem="FRO-22-zbF" secondAttribute="top" constant="20" id="AqL-xU-mpw"/>
                                             <constraint firstItem="1oq-VO-3SB" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="Gz6-bQ-nKJ"/>
-                                            <constraint firstItem="fsa-It-vpI" firstAttribute="top" secondItem="xlP-ui-12i" secondAttribute="bottom" constant="10" id="Iv3-cL-Hns"/>
                                             <constraint firstAttribute="bottom" secondItem="1oq-VO-3SB" secondAttribute="bottom" constant="8" id="JQw-WE-3w4"/>
+                                            <constraint firstItem="58P-QP-Ogn" firstAttribute="centerX" secondItem="xlP-ui-12i" secondAttribute="centerX" id="Jez-VH-2Qo"/>
+                                            <constraint firstAttribute="trailing" secondItem="zM9-iP-98m" secondAttribute="trailing" constant="10" id="PSb-yn-vIU"/>
+                                            <constraint firstAttribute="trailing" secondItem="KIt-dd-gqA" secondAttribute="trailing" constant="10" id="Sv6-5F-9ch"/>
                                             <constraint firstItem="zM9-iP-98m" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="XvO-Ur-tGN"/>
+                                            <constraint firstItem="58P-QP-Ogn" firstAttribute="centerY" secondItem="xlP-ui-12i" secondAttribute="centerY" id="dVU-ua-CZB"/>
+                                            <constraint firstItem="KIt-dd-gqA" firstAttribute="top" secondItem="xlP-ui-12i" secondAttribute="bottom" constant="8" id="eOX-v9-ZV7"/>
                                             <constraint firstItem="1oq-VO-3SB" firstAttribute="top" secondItem="zM9-iP-98m" secondAttribute="bottom" constant="8" id="fpw-T4-bTV"/>
+                                            <constraint firstItem="KIt-dd-gqA" firstAttribute="leading" secondItem="FRO-22-zbF" secondAttribute="leading" constant="10" id="gfv-f9-KTQ"/>
                                             <constraint firstItem="xlP-ui-12i" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="sZ7-FA-6s9"/>
-                                            <constraint firstItem="zM9-iP-98m" firstAttribute="top" secondItem="fsa-It-vpI" secondAttribute="bottom" constant="10" id="zws-jK-opS"/>
+                                            <constraint firstItem="zM9-iP-98m" firstAttribute="leading" secondItem="FRO-22-zbF" secondAttribute="leading" constant="10" id="uXy-GB-yGz"/>
                                         </constraints>
                                         <connections>
                                             <binding destination="XfG-lQ-9wD" name="hidden2" keyPath="isApplicationRunning" previousBinding="9YY-an-TOi" id="dRN-Rc-m3t">

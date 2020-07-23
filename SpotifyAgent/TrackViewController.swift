@@ -14,6 +14,7 @@ class TrackViewController: NSViewController {
     @objc dynamic var isTrackPaused = true
     @objc dynamic var isApplicationRunning = false
     @objc dynamic var isApplicationLaunching = false
+    @objc dynamic var isImageLoading = false
     @objc dynamic var image: NSImage?
     private var previousImageAddress: String?
     
@@ -36,7 +37,7 @@ class TrackViewController: NSViewController {
                 return
             }
             self.renewApplicationState()
-            if self.representedObject == nil && self.isApplicationRunning {
+            if self.isApplicationRunning {
                 self.renewInformation()
             }
         })
@@ -59,6 +60,7 @@ class TrackViewController: NSViewController {
                 self.isApplicationLaunching = false
             }
         })
+        isImageLoading = true
     }
     
     deinit {
@@ -105,6 +107,7 @@ class TrackViewController: NSViewController {
     override var representedObject: Any? {
         didSet {
             guard let representedObject = self.representedObject as? [String: Any], let urlString = representedObject["artwork"] as? String, let url = URL(string: urlString), (previousImageAddress == nil || previousImageAddress != urlString) else {
+                isImageLoading = false
                 return
             }
             previousImageAddress = urlString
@@ -120,6 +123,7 @@ class TrackViewController: NSViewController {
                 let image = NSImage(data: data)
                 DispatchQueue.main.async {
                     self?.image = image
+                    self?.isImageLoading = false
                 }
             }.resume()
             
