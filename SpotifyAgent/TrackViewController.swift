@@ -7,9 +7,12 @@
 //
 
 import Cocoa
-import AVFoundation
+import os.log
 
 class TrackViewController: NSViewController {
+    
+    @IBOutlet var popoverMenu: NSMenu!
+    @IBOutlet weak var viewToPlacePopover: NSView!
     
     @objc dynamic var isTrackPaused = true
     @objc dynamic var isApplicationRunning = false
@@ -160,6 +163,7 @@ class TrackViewController: NSViewController {
         runAppleScript(withName: tellToPlayNext) { [weak self] _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self?.renewInformation()
+                self?.getPlayButtonState()
             }
         }
     }
@@ -168,6 +172,7 @@ class TrackViewController: NSViewController {
         runAppleScript(withName: tellToPlayPrevious) { [weak self] _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self?.renewInformation()
+                self?.getPlayButtonState()
             }
         }
     }
@@ -176,6 +181,39 @@ class TrackViewController: NSViewController {
         isApplicationLaunching = true
         DispatchQueue.global(qos: .default).async { [weak self] in
             self?.runAppleScript(withName: runApplication, successBlock: nil)
+        }
+    }
+    
+    @IBAction func buttonForDropDownMenuPushed(_ sender: NSButton) {
+        if let event = NSApplication.shared.currentEvent {
+            NSMenu.popUpContextMenu(sender.menu!, with: event, for: sender)
+        }
+    }
+    
+    @IBAction func nameOrAuthorPushed(_ sender: Any) {
+        guard let representedDictionary = representedObject as? [String: Any], let name = representedDictionary["name"] as? String, let artist = representedDictionary["artist"] as? String else {
+            os_log("Represented Object is bad", log: .default, type: .fault)
+            return
+        }
+        
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString("\(name) - \(artist)", forType: .string)
+        
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        guard let viewController = storyboard.instantiateController(withIdentifier: "CopiedPopover") as? NSViewController else {
+            os_log("Copied popover view controller is nil", log: .default, type: .fault)
+            return
+        }
+        viewController.representedObject = ["title": NSLocalizedString("Copied", comment: "Copy label")]
+
+        let popoverCopied = NSPopover()
+        popoverCopied.behavior = .semitransient
+        popoverCopied.contentViewController = viewController
+        popoverCopied.show(relativeTo: .zero, of: viewToPlacePopover, preferredEdge: .maxX)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            if popoverCopied.isShown {
+                popoverCopied.close()
+            }
         }
     }
 }
