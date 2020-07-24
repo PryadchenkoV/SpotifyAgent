@@ -725,10 +725,8 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="ZH5-8R-TJJ" secondAttribute="bottom" id="5DJ-Cu-Hxw"/>
-                                                            <constraint firstItem="5Bo-PN-AYT" firstAttribute="leading" secondItem="ZH5-8R-TJJ" secondAttribute="trailing" constant="8" id="C3g-AH-Iv9"/>
                                                             <constraint firstAttribute="bottom" secondItem="ZH5-8R-TJJ" secondAttribute="bottom" id="N7u-iL-NaE"/>
                                                             <constraint firstItem="5Bo-PN-AYT" firstAttribute="top" secondItem="cco-Jv-IGn" secondAttribute="top" id="Pdb-lT-4Cs"/>
-                                                            <constraint firstItem="5Bo-PN-AYT" firstAttribute="leading" secondItem="ZH5-8R-TJJ" secondAttribute="trailing" constant="8" id="QAq-Sc-6uE"/>
                                                             <constraint firstAttribute="bottom" secondItem="5Bo-PN-AYT" secondAttribute="bottom" id="VEl-JT-fQu"/>
                                                             <constraint firstItem="ZH5-8R-TJJ" firstAttribute="top" secondItem="cco-Jv-IGn" secondAttribute="top" id="ZPP-GL-AfU"/>
                                                             <constraint firstItem="5Bo-PN-AYT" firstAttribute="centerY" secondItem="ZH5-8R-TJJ" secondAttribute="centerY" id="ZpN-5s-oUO"/>
@@ -870,6 +868,16 @@
                                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="image" id="OZp-MY-LBN"/>
                                                 </connections>
                                             </imageView>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ctH-6n-dXJ">
+                                                <rect key="frame" x="97" y="66" width="56" height="59"/>
+                                                <gestureRecognizers>
+                                                    <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="5Fv-eT-r1V">
+                                                        <connections>
+                                                            <action selector="nameOrAuthorPushed:" target="XfG-lQ-9wD" id="fpb-eP-6Nt"/>
+                                                        </connections>
+                                                    </clickGestureRecognizer>
+                                                </gestureRecognizers>
+                                            </customView>
                                             <visualEffectView blendingMode="withinWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="umt-iP-P7k" customClass="VisualEffectViewWithRoundCorners" customModule="SpotifyAgent" customModuleProvider="target">
                                                 <rect key="frame" x="99" y="66" width="53" height="24"/>
                                                 <subviews>
@@ -881,6 +889,7 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <action selector="nameOrAuthorPushed:" target="XfG-lQ-9wD" id="COx-dp-leR"/>
                                                             <binding destination="XfG-lQ-9wD" name="value" keyPath="representedObject.artist" id="DqX-6j-CHx"/>
                                                         </connections>
                                                     </textField>
@@ -891,6 +900,13 @@
                                                     <constraint firstAttribute="trailing" secondItem="zM9-iP-98m" secondAttribute="trailing" constant="4" id="pLP-CN-E56"/>
                                                     <constraint firstItem="zM9-iP-98m" firstAttribute="top" secondItem="umt-iP-P7k" secondAttribute="top" constant="4" id="uez-D6-uW8"/>
                                                 </constraints>
+                                                <gestureRecognizers>
+                                                    <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="Jhw-zS-RCs">
+                                                        <connections>
+                                                            <action selector="nameOrAuthorPushed:" target="XfG-lQ-9wD" id="jvo-KE-I9Y"/>
+                                                        </connections>
+                                                    </clickGestureRecognizer>
+                                                </gestureRecognizers>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="12"/>
@@ -1076,20 +1092,27 @@
                                             <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="58P-QP-Ogn">
                                                 <rect key="frame" x="109" y="109" width="32" height="32"/>
                                                 <connections>
-                                                    <binding destination="XfG-lQ-9wD" name="animate" keyPath="isImageLoading" id="j24-Mf-naA"/>
                                                     <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isImageLoading" id="4Eg-Z0-nYe">
                                                         <dictionary key="options">
                                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                         </dictionary>
                                                     </binding>
+                                                    <binding destination="XfG-lQ-9wD" name="animate" keyPath="isImageLoading" id="j24-Mf-naA"/>
                                                 </connections>
                                             </progressIndicator>
                                             <visualEffectView blendingMode="withinWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="umc-DQ-K8y" customClass="VisualEffectViewWithRoundCorners" customModule="SpotifyAgent" customModuleProvider="target">
-                                                <rect key="frame" x="65" y="98" width="120" height="27"/>
+                                                <rect key="frame" x="97" y="98" width="56" height="27"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="KIt-dd-gqA">
-                                                        <rect key="frame" x="2" y="4" width="116" height="19"/>
-                                                        <textFieldCell key="cell" selectable="YES" alignment="center" title="Multiline Label" id="NMz-rz-DGC">
+                                                        <rect key="frame" x="2" y="4" width="52" height="19"/>
+                                                        <gestureRecognizers>
+                                                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="Soa-l6-oqX">
+                                                                <connections>
+                                                                    <action selector="nameOrAuthorPushed:" target="XfG-lQ-9wD" id="N6B-AO-GYm"/>
+                                                                </connections>
+                                                            </clickGestureRecognizer>
+                                                        </gestureRecognizers>
+                                                        <textFieldCell key="cell" alignment="center" title="Name" id="NMz-rz-DGC">
                                                             <font key="font" metaFont="systemMedium" size="16"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1102,7 +1125,6 @@
                                                 <constraints>
                                                     <constraint firstItem="KIt-dd-gqA" firstAttribute="leading" secondItem="umc-DQ-K8y" secondAttribute="leading" constant="4" id="C4n-Ji-2Eu"/>
                                                     <constraint firstItem="KIt-dd-gqA" firstAttribute="centerX" secondItem="umc-DQ-K8y" secondAttribute="centerX" id="P1f-Ih-04P"/>
-                                                    <constraint firstAttribute="trailing" secondItem="KIt-dd-gqA" secondAttribute="trailing" constant="4" id="bV5-d2-Hly"/>
                                                     <constraint firstAttribute="bottom" secondItem="KIt-dd-gqA" secondAttribute="bottom" constant="4" id="fdM-vw-9W6"/>
                                                     <constraint firstItem="KIt-dd-gqA" firstAttribute="top" secondItem="umc-DQ-K8y" secondAttribute="top" constant="4" id="qVp-Hk-HKU"/>
                                                 </constraints>
@@ -1149,14 +1171,18 @@
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="umc-DQ-K8y" secondAttribute="trailing" constant="10" id="2dU-zb-d8R"/>
                                             <constraint firstItem="1oq-VO-3SB" firstAttribute="top" secondItem="umt-iP-P7k" secondAttribute="bottom" constant="8" id="3zO-Zd-OkK"/>
                                             <constraint firstItem="umt-iP-P7k" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="5Xi-Tm-hg5"/>
+                                            <constraint firstItem="ctH-6n-dXJ" firstAttribute="bottom" secondItem="umt-iP-P7k" secondAttribute="bottom" id="8sY-Zk-Ud4"/>
                                             <constraint firstItem="umt-iP-P7k" firstAttribute="top" secondItem="umc-DQ-K8y" secondAttribute="bottom" constant="8" id="8wM-P7-KCd"/>
                                             <constraint firstItem="xlP-ui-12i" firstAttribute="top" secondItem="FRO-22-zbF" secondAttribute="top" id="AqL-xU-mpw"/>
                                             <constraint firstItem="1oq-VO-3SB" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="Gz6-bQ-nKJ"/>
+                                            <constraint firstItem="ctH-6n-dXJ" firstAttribute="leading" secondItem="umc-DQ-K8y" secondAttribute="leading" id="Iph-aG-ppS"/>
                                             <constraint firstAttribute="bottom" secondItem="1oq-VO-3SB" secondAttribute="bottom" constant="8" id="JQw-WE-3w4"/>
                                             <constraint firstItem="58P-QP-Ogn" firstAttribute="centerX" secondItem="xlP-ui-12i" secondAttribute="centerX" id="Jez-VH-2Qo"/>
+                                            <constraint firstItem="ctH-6n-dXJ" firstAttribute="top" secondItem="umc-DQ-K8y" secondAttribute="top" id="LrZ-U9-WQH"/>
                                             <constraint firstItem="umc-DQ-K8y" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="Pig-lt-eoe"/>
                                             <constraint firstItem="GWw-y4-iUB" firstAttribute="top" secondItem="FRO-22-zbF" secondAttribute="top" constant="8" id="Sge-pV-waB"/>
                                             <constraint firstItem="umt-iP-P7k" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FRO-22-zbF" secondAttribute="leading" constant="10" id="URQ-JC-era"/>
+                                            <constraint firstItem="ctH-6n-dXJ" firstAttribute="trailing" secondItem="umc-DQ-K8y" secondAttribute="trailing" id="YoO-rp-Spn"/>
                                             <constraint firstItem="umc-DQ-K8y" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FRO-22-zbF" secondAttribute="leading" constant="10" id="b1o-XW-SPQ"/>
                                             <constraint firstItem="xlP-ui-12i" firstAttribute="leading" secondItem="FRO-22-zbF" secondAttribute="leading" id="c9g-7u-CIx"/>
                                             <constraint firstItem="58P-QP-Ogn" firstAttribute="centerY" secondItem="xlP-ui-12i" secondAttribute="centerY" id="dVU-ua-CZB"/>
@@ -1208,6 +1234,7 @@
                     </view>
                     <connections>
                         <outlet property="popoverMenu" destination="O0y-17-TIw" id="4vJ-vP-0xm"/>
+                        <outlet property="viewToPlacePopover" destination="ctH-6n-dXJ" id="Igz-hF-yC5"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1229,6 +1256,38 @@
                 </menu>
             </objects>
             <point key="canvasLocation" x="255" y="346"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7n3-bJ-OJ4">
+            <objects>
+                <viewController storyboardIdentifier="CopiedPopover" id="foV-nY-6c5" sceneMemberID="viewController">
+                    <view key="view" id="6pK-71-aca">
+                        <rect key="frame" x="0.0" y="0.0" width="64" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="adc-pL-uQF">
+                                <rect key="frame" x="6" y="8" width="52" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Cøpied!" id="mgU-UC-da7">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="foV-nY-6c5" name="value" keyPath="representedObject.title" id="1D1-iB-Sf6"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="adc-pL-uQF" firstAttribute="top" secondItem="6pK-71-aca" secondAttribute="top" constant="8" id="Gcz-ZJ-E4d"/>
+                            <constraint firstAttribute="bottom" secondItem="adc-pL-uQF" secondAttribute="bottom" constant="8" id="Ipm-mf-KAC"/>
+                            <constraint firstItem="adc-pL-uQF" firstAttribute="leading" secondItem="6pK-71-aca" secondAttribute="leading" constant="8" id="MBk-hc-UsB"/>
+                            <constraint firstAttribute="trailing" secondItem="adc-pL-uQF" secondAttribute="trailing" constant="8" id="coz-EO-aGF"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="26v-oW-AmN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6" y="153"/>
         </scene>
     </scenes>
     <resources>
