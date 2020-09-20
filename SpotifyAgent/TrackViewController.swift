@@ -9,6 +9,19 @@
 import Cocoa
 import os.log
 
+func runAppleScript(withName scriptName: String, successBlock: ((NSAppleEventDescriptor) -> Void)?) {
+    if let script = NSAppleScript(source: scriptName) {
+        var error: NSDictionary?
+        let result = script.executeAndReturnError(&error)
+        if let err = error {
+            print(err)
+        } else {
+            successBlock?(result)
+        }
+    }
+}
+let kNeedRefreshNotificationName = Notification.Name.init(rawValue: "NeedRefreshNotification")
+
 class TrackViewController: NSViewController {
     
     @IBOutlet var popoverMenu: NSMenu!
@@ -17,9 +30,9 @@ class TrackViewController: NSViewController {
     @objc dynamic var isTrackPaused = true
     @objc dynamic var isApplicationRunning = false
     @objc dynamic var isApplicationLaunching = false
-    @objc dynamic var isImageLoading = false
-    @objc dynamic var image: NSImage?
-    private var previousImageAddress: String?
+    @objc dynamic var isHistoryShown = false
+    
+    let songModel = SongModel.shared
     
     var timerRenewInformation: Timer?
     var timerApplicationRunning: Timer?
@@ -29,6 +42,12 @@ class TrackViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         renewApplicationState()
+        
+        NotificationCenter.default.addObserver(forName: kNeedRefreshNotificationName, object: nil, queue: .main) { [weak self] (_) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                self?.renewInformation()
+            }
+        }
         
         timerApplicationRunning = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] (_) in
             self?.renewApplicationState()
@@ -63,10 +82,15 @@ class TrackViewController: NSViewController {
                 self.isApplicationLaunching = false
             }
         })
-        isImageLoading = true
+    }
+    
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        isHistoryShown = false
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         observer?.invalidate()
     }
     
@@ -95,52 +119,25 @@ class TrackViewController: NSViewController {
                 print("Self is nil")
                 return
             }
-            var spotifyInfo = [String : Any]()
+            var spotifyInfo = [String : String]()
+            var song: Song?
             if result.numberOfItems > 0 {
                 for (index, item) in spotifyKeys.enumerated() {
                     spotifyInfo[item] = result.atIndex(index + 1)?.stringValue
                 }
+                guard let name = spotifyInfo["name"], let artist = spotifyInfo["artist"], let artworkURL = spotifyInfo["artwork"], let songURL = spotifyInfo["songURL"] else {
+                    os_log(.error, "Some of components is nil")
+                    return
+                }
+                song = Song(name: name, artist: artist, artworkURL: artworkURL, songURL: songURL)
             }
             DispatchQueue.main.async {
-                self.representedObject = spotifyInfo.count > 0 ? spotifyInfo : nil
-            }
-        }
-    }
-    
-    override var representedObject: Any? {
-        didSet {
-            guard let representedObject = self.representedObject as? [String: Any], let urlString = representedObject["artwork"] as? String, let url = URL(string: urlString), (previousImageAddress == nil || previousImageAddress != urlString) else {
-                isImageLoading = false
-                return
-            }
-            previousImageAddress = urlString
-            URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-                if let error = error {
-                    print("Error \(error.localizedDescription)")
-                    return
+                if self.representedObject == nil || song == nil {
+                    self.representedObject = song
+                } else if let representedObject = self.representedObject as? Song, let songNotNil = song, representedObject != songNotNil {
+                    self.representedObject = song
+                    self.songModel.addSongToHistory(song: representedObject)
                 }
-                guard let data = data else {
-                    print("Data is nil")
-                    return
-                }
-                let image = NSImage(data: data)
-                DispatchQueue.main.async {
-                    self?.image = image
-                    self?.isImageLoading = false
-                }
-            }.resume()
-            
-        }
-    }
-    
-    func runAppleScript(withName scriptName: String, successBlock: ((NSAppleEventDescriptor) -> Void)?) {
-        if let script = NSAppleScript(source: scriptName) {
-            var error: NSDictionary?
-            let result = script.executeAndReturnError(&error)
-            if let err = error {
-                print(err)
-            } else {
-                successBlock?(result)
             }
         }
     }
@@ -180,7 +177,7 @@ class TrackViewController: NSViewController {
     @IBAction func runApplicationButtonPushed(_ sender: Any) {
         isApplicationLaunching = true
         DispatchQueue.global(qos: .default).async { [weak self] in
-            self?.runAppleScript(withName: runApplication, successBlock: nil)
+            runAppleScript(withName: runApplication, successBlock: nil)
         }
     }
     
@@ -191,13 +188,13 @@ class TrackViewController: NSViewController {
     }
     
     @IBAction func nameOrAuthorPushed(_ sender: Any) {
-        guard let representedDictionary = representedObject as? [String: Any], let name = representedDictionary["name"] as? String, let artist = representedDictionary["artist"] as? String else {
+        guard let song = representedObject as? Song else {
             os_log("Represented Object is bad", log: .default, type: .fault)
             return
         }
         
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString("\(name) - \(artist)", forType: .string)
+        NSPasteboard.general.setString("\(song.name) - \(song.artist)", forType: .string)
         
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         guard let viewController = storyboard.instantiateController(withIdentifier: "CopiedPopover") as? NSViewController else {
@@ -215,6 +212,9 @@ class TrackViewController: NSViewController {
                 popoverCopied.close()
             }
         }
+    }
+    @IBAction func showHistoryPushed(_ sender: Any) {
+        isHistoryShown.toggle()
     }
 }
 

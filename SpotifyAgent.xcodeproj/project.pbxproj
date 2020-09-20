@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96311FD92517D65300C628AE /* ModelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96311FD82517D65300C628AE /* ModelDataSource.swift */; };
+		96311FDB2517D75E00C628AE /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96311FDA2517D75E00C628AE /* HistoryViewController.swift */; };
 		964A476024C9C7DD006EF187 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 964A475F24C9C7DD006EF187 /* InfoPlist.strings */; };
 		964A476624C9FC38006EF187 /* VisualEffectViewWithRoundCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A476524C9FC37006EF187 /* VisualEffectViewWithRoundCorners.swift */; };
 		964A476824CAFE8F006EF187 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A476724CAFE8F006EF187 /* Song.swift */; };
 		964A476B24CB2952006EF187 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 964A476D24CB2952006EF187 /* Localizable.strings */; };
+		969037A624D1C11100C9F9A3 /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969037A524D1C11100C9F9A3 /* SongModel.swift */; };
 		96A2A4F724C0612F009F38B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2A4F624C0612F009F38B7 /* AppDelegate.swift */; };
 		96A2A4F924C0612F009F38B7 /* TrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2A4F824C0612F009F38B7 /* TrackViewController.swift */; };
 		96A2A4FB24C06130009F38B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96A2A4FA24C06130009F38B7 /* Assets.xcassets */; };
@@ -20,11 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		964A475824C9A78B006EF187 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		96311FD82517D65300C628AE /* ModelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDataSource.swift; sourceTree = "<group>"; };
+		96311FDA2517D75E00C628AE /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		96311FDC2517ED5100C628AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		964A475F24C9C7DD006EF187 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		964A476524C9FC37006EF187 /* VisualEffectViewWithRoundCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewWithRoundCorners.swift; sourceTree = "<group>"; };
 		964A476724CAFE8F006EF187 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		964A476C24CB2952006EF187 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		969037A524D1C11100C9F9A3 /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
 		96A2A4F324C0612F009F38B7 /* SpotifyAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96A2A4F624C0612F009F38B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96A2A4F824C0612F009F38B7 /* TrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +75,7 @@
 				964A476524C9FC37006EF187 /* VisualEffectViewWithRoundCorners.swift */,
 				96A2A4F624C0612F009F38B7 /* AppDelegate.swift */,
 				96A2A4F824C0612F009F38B7 /* TrackViewController.swift */,
+				969037A524D1C11100C9F9A3 /* SongModel.swift */,
 				964A476D24CB2952006EF187 /* Localizable.strings */,
 				96F951A524C1847F00ED26D6 /* EventMonitor.swift */,
 				96F951DC24C8AA0800ED26D6 /* SpotifyScripts.swift */,
@@ -78,6 +85,8 @@
 				96A2A4FF24C06130009F38B7 /* Info.plist */,
 				96A2A50024C06130009F38B7 /* SpotifyAgent.entitlements */,
 				964A475F24C9C7DD006EF187 /* InfoPlist.strings */,
+				96311FD82517D65300C628AE /* ModelDataSource.swift */,
+				96311FDA2517D75E00C628AE /* HistoryViewController.swift */,
 			);
 			path = SpotifyAgent;
 			sourceTree = "<group>";
@@ -92,6 +101,7 @@
 				96A2A4EF24C0612F009F38B7 /* Sources */,
 				96A2A4F024C0612F009F38B7 /* Frameworks */,
 				96A2A4F124C0612F009F38B7 /* Resources */,
+				96311FDD2517F04000C628AE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -149,6 +159,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		96311FDD2517F04000C628AE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		96A2A4EF24C0612F009F38B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -157,7 +187,10 @@
 				964A476824CAFE8F006EF187 /* Song.swift in Sources */,
 				96F951A624C1847F00ED26D6 /* EventMonitor.swift in Sources */,
 				96F951DD24C8AA0800ED26D6 /* SpotifyScripts.swift in Sources */,
+				969037A624D1C11100C9F9A3 /* SongModel.swift in Sources */,
+				96311FD92517D65300C628AE /* ModelDataSource.swift in Sources */,
 				96A2A4F924C0612F009F38B7 /* TrackViewController.swift in Sources */,
+				96311FDB2517D75E00C628AE /* HistoryViewController.swift in Sources */,
 				964A476624C9FC38006EF187 /* VisualEffectViewWithRoundCorners.swift in Sources */,
 				96A2A4F724C0612F009F38B7 /* AppDelegate.swift in Sources */,
 			);
@@ -178,7 +211,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				96A2A4FD24C06130009F38B7 /* Base */,
-				964A475824C9A78B006EF187 /* en */,
+				96311FDC2517ED5100C628AE /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

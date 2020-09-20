@@ -8,7 +8,7 @@
 
 import Foundation
 
-let spotifyKeys = ["name", "artist", "artwork"]
+let spotifyKeys = ["name", "artist", "artwork", "songURL"]
 
 let getApplicationRunning = """
     if application "Spotify" is running then
@@ -37,7 +37,7 @@ let getPlayerStatus = """
 let getTrackScript = """
       tell application "Spotify"
         set c to the current track
-        return { name:name of c, artist:artist of c, artwork:artwork url of c }
+        return { name:name of c, artist:artist of c, artwork:artwork url of c, url:spotify url of c }
       end tell
 """
 
@@ -52,3 +52,9 @@ let tellToPlayNext = """
 let tellToPlayPrevious = """
     tell application "Spotify" to previous track
 """
+
+func tellToPlaySong(with url: String) -> String {
+    return """
+    tell application "Spotify" to play track "\(url)"
+"""
+}

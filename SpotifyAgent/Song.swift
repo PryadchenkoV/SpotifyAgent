@@ -11,17 +11,34 @@ import os.log
 
 class Song: NSObject {
 
-    var name: String
-    var artist: String
+    @objc dynamic var name: String
+    @objc dynamic var artist: String
     var artworkURL: String
-    var artwork: NSImage?
-    var songURL: String
+    @objc dynamic var artwork: NSImage?
+    @objc dynamic var isImageLoading = true
+    @objc dynamic var songURL: String
+    @objc dynamic var isLastSongPlayedSong: Bool
     
     init(name: String, artist: String, artworkURL: String, songURL: String) {
         self.name = name
         self.artist = artist
         self.artworkURL = artworkURL
         self.songURL = songURL
+        self.isLastSongPlayedSong = false
+        super.init()
+        self.downloadArtwork()
+    }
+    
+    required init?(coder decoder: NSCoder)
+    {
+        guard let name = decoder.decodeObject(forKey: "name") as? String, let artist = decoder.decodeObject(forKey: "artist") as? String, let artworkURL = decoder.decodeObject(forKey: "artworkURL") as? String, let songURL = decoder.decodeObject(forKey: "songURL") as? String, let isLastSongPlayedSong = decoder.decodeBool(forKey: "isLastSongPlayedSong") as? Bool else {
+            fatalError()
+        }
+        self.name = name
+        self.artist = artist
+        self.artworkURL = artworkURL
+        self.songURL = songURL
+        self.isLastSongPlayedSong = isLastSongPlayedSong
         super.init()
         self.downloadArtwork()
     }
@@ -41,7 +58,32 @@ class Song: NSObject {
                 return
             }
             let image = NSImage(data: data)
-            self?.artwork = image
+            DispatchQueue.main.async {
+                self?.artwork = image
+                self?.isImageLoading = false
+            }
         }.resume()
     }
+    
+    static func != (lhs: Song, rhs: Song) -> Bool {
+        return lhs.artist != rhs.artist || lhs.name != rhs.name || lhs.songURL != rhs.songURL
+    }
 }
+
+extension Song: NSCoding {
+    func encode(with coder: NSCoder) {
+        coder.encode(self.name, forKey: "name")
+        coder.encode(self.artist, forKey: "artist")
+        coder.encode(self.artworkURL, forKey: "artworkURL")
+        coder.encode(self.isLastSongPlayedSong, forKey: "isLastSongPlayedSong")
+        coder.encode(self.songURL, forKey: "songURL")
+    }
+    
+    
+}
+
+//extension Song: Equatable {
+//    static func == (lhs: Song, rhs: Song) -> Bool {
+//        return lhs.artist == rhs.artist && lhs.name == rhs.name && lhs.songURL == rhs.songURL
+//    }
+//}
