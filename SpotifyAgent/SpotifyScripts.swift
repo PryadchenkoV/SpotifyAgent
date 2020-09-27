@@ -10,6 +10,13 @@ import Foundation
 
 let spotifyKeys = ["name", "artist", "artwork", "songURL"]
 
+let getSpotifyInstalled = """
+    try
+        do shell script "osascript -e 'exists application Spotify'"
+        return true
+    end try
+"""
+
 let getApplicationRunning = """
     if application "Spotify" is running then
         return true

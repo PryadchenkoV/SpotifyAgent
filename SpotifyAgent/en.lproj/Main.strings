@@ -1,4 +1,3 @@
-
 /* Class = "NSMenu"; title = "Find"; ObjectID = "1b7-l0-nxx"; */
 "1b7-l0-nxx.title" = "Find";
 
@@ -146,6 +145,9 @@
 /* Class = "NSMenuItem"; title = "Oπen åpp"; ObjectID = "Fnp-MQ-YMc"; */
 "Fnp-MQ-YMc.title" = "Open App";
 
+/* Class = "NSTextFieldCell"; title = "App is not installed"; ObjectID = "Fow-sT-G8K"; */
+"Fow-sT-G8K.title" = "App is not installed";
+
 /* Class = "NSMenuItem"; title = "Bold"; ObjectID = "GB9-OM-e27"; */
 "GB9-OM-e27.title" = "Bold";
 
@@ -282,7 +284,7 @@
 "pa3-QI-u2k.title" = "Delete";
 
 /* Class = "NSButtonCell"; title = "Rün App"; ObjectID = "pJD-f9-mVU"; */
-"pJD-f9-mVU.title" = "Rün App";
+"pJD-f9-mVU.title" = "Run App";
 
 /* Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL"; */
 "Ptp-SP-VEL.title" = "Bigger";
@@ -336,7 +338,7 @@
 "tlD-Oa-oAM.title" = "Kern";
 
 /* Class = "NSTextFieldCell"; title = "Nøthing is plåying"; ObjectID = "tMa-UO-qsz"; */
-"tMa-UO-qsz.title" = "Nøthing is plåying";
+"tMa-UO-qsz.title" = "Nothing is playing";
 
 /* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "tRr-pd-1PS"; */
 "tRr-pd-1PS.title" = "Data Detectors";
@@ -354,7 +356,7 @@
 "uRl-iY-unG.title" = "Cut";
 
 /* Class = "NSTextFieldCell"; title = "Aπp iß nøt runñing"; ObjectID = "v11-rj-LCa"; */
-"v11-rj-LCa.title" = "Aπp iß nøt runñing";
+"v11-rj-LCa.title" = "App is not running";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Hide Others";
