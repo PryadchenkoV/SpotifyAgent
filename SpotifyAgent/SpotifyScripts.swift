@@ -12,8 +12,10 @@ let spotifyKeys = ["name", "artist", "artwork", "songURL"]
 
 let getSpotifyInstalled = """
     try
-        do shell script "osascript -e 'exists application Spotify'"
-        return true
+        tell application "Finder" to get application file id "com.spotify.client"
+        set appExists to true
+    on error
+        set appExists to false
     end try
 """
 

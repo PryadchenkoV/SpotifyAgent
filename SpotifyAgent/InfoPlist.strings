@@ -5,4 +5,6 @@
   Created by Work on 23/07/2020.
   Copyright © 2020 Work. All rights reserved.
 */
-NSAppleEventsUsageDescription = "To access information from Spotify app";
+CFBundleDisplayName = "Spotify Agent";
+CFBundleName = "Spotify Agent";
+NSAppleEventsUsageDescription = "$(PRODUCT_NAME) use AppleScript to communicate with other apps such as Finder and Spotify";

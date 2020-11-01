@@ -1408,8 +1408,8 @@
         <scene sceneID="JKD-AC-Jh8">
             <objects>
                 <viewController id="fxK-Bj-PTt" customClass="HistoryViewController" customModule="SpotifyAgent" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="lP7-cF-PLd">
-                        <rect key="frame" x="0.0" y="0.0" width="468" height="500"/>
+                    <view key="view" misplaced="YES" id="lP7-cF-PLd">
+                        <rect key="frame" x="0.0" y="0.0" width="454" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4l-uj-0PL">
@@ -1455,13 +1455,13 @@
                                                 </textFieldCell>
                                             </textField>
                                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAU-Cd-qVQ">
-                                                <rect key="frame" x="0.0" y="47" width="457" height="167"/>
-                                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="l0A-nm-LYc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="457" height="167"/>
+                                                <rect key="frame" x="0.0" y="26" width="457" height="188"/>
+                                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="l0A-nm-LYc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="457" height="188"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="43" viewBased="YES" id="tKk-At-Byi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="457" height="167"/>
+                                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="43" viewBased="YES" id="tKk-At-Byi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="457" height="188"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1595,8 +1595,11 @@
                                                     <fragment content="#bc-ignore!"/>
                                                 </attributedString>
                                             </box>
-                                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="iab-PC-hbh">
-                                                <rect key="frame" x="0.0" y="23" width="457" height="18"/>
+                                            <box horizontalHuggingPriority="1000" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="iab-PC-hbh">
+                                                <rect key="frame" x="0.0" y="23" width="457" height="5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="s2C-D8-64j"/>
+                                                </constraints>
                                             </box>
                                         </subviews>
                                         <constraints>
@@ -1604,7 +1607,7 @@
                                             <constraint firstAttribute="trailing" secondItem="iab-PC-hbh" secondAttribute="trailing" id="Ckz-YQ-vV0"/>
                                             <constraint firstAttribute="trailing" secondItem="diw-Lf-bsL" secondAttribute="trailing" id="Eyx-tf-eST"/>
                                             <constraint firstItem="0av-iB-bIr" firstAttribute="leading" secondItem="WNU-vK-Grd" secondAttribute="leading" id="JQL-vN-O6N"/>
-                                            <constraint firstItem="iab-PC-hbh" firstAttribute="top" secondItem="NAU-Cd-qVQ" secondAttribute="bottom" constant="8" id="KbF-k4-Awl"/>
+                                            <constraint firstItem="iab-PC-hbh" firstAttribute="top" secondItem="NAU-Cd-qVQ" secondAttribute="bottom" id="KbF-k4-Awl"/>
                                             <constraint firstAttribute="trailing" secondItem="NAU-Cd-qVQ" secondAttribute="trailing" id="M4I-Ac-nsj"/>
                                             <constraint firstItem="iab-PC-hbh" firstAttribute="leading" secondItem="WNU-vK-Grd" secondAttribute="leading" id="VlN-uG-SLA"/>
                                             <constraint firstItem="NAU-Cd-qVQ" firstAttribute="top" secondItem="0av-iB-bIr" secondAttribute="top" id="c58-aQ-tos"/>
@@ -1664,7 +1667,7 @@
                 </arrayController>
                 <customObject id="GQS-YI-U2U" customClass="ModelDataSource" customModule="SpotifyAgent" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="239" y="1054"/>
+            <point key="canvasLocation" x="232" y="1054"/>
         </scene>
     </scenes>
     <resources>

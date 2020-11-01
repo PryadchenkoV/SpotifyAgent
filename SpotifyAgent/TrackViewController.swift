@@ -75,7 +75,7 @@ class TrackViewController: NSViewController {
         
         timerRenewInformation = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] (_) in
             guard let self = self else {
-                print("Self is nil")
+                os_log("Self is nil")
                 return
             }
             self.renewApplicationState()

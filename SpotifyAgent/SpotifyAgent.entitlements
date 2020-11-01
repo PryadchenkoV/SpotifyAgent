@@ -12,6 +12,7 @@
 	<true/>
 	<key>com.apple.security.temporary-exception.apple-events</key>
 	<array>
+		<string>com.apple.Finder</string>
 		<string>com.spotify.client</string>
 	</array>
 </dict>
