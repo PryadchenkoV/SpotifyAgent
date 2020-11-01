@@ -35,6 +35,8 @@ class TrackViewController: NSViewController {
     @objc dynamic var isApplicationLaunching = false
     @objc dynamic var isHistoryShown = false
     
+    @objc dynamic var artworkImage: NSImage?
+    
     let songModel = SongModel.shared
     private let historyViewWidth: CGFloat = 150
     
@@ -43,6 +45,7 @@ class TrackViewController: NSViewController {
     var timerApplicationRunning: Timer?
     
     var observer: NSKeyValueObservation?
+    var imageObserver: NSKeyValueObservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +86,7 @@ class TrackViewController: NSViewController {
                 self.renewInformation()
             }
         })
+        
         historyViewWidthConstraint.constant = 0
         historyView.isHidden = !isHistoryShown
         
@@ -181,8 +185,22 @@ class TrackViewController: NSViewController {
             DispatchQueue.main.async {
                 if self.representedObject == nil || song == nil {
                     self.representedObject = song
+                    if song != nil {
+                        self.imageObserver = song?.observe(\.isImageLoading, changeHandler: { [weak self] (song, _) in
+                            if !song.isImageLoading {
+                                self?.artworkImage = song.artwork
+                                self?.imageObserver?.invalidate()
+                            }
+                        })
+                    }
                 } else if let representedObject = self.representedObject as? Song, let songNotNil = song, representedObject != songNotNil {
                     self.representedObject = song
+                    self.imageObserver = song?.observe(\.isImageLoading, changeHandler: { [weak self] (song, _) in
+                        if !song.isImageLoading {
+                            self?.artworkImage = song.artwork
+                            self?.imageObserver?.invalidate()
+                        }
+                    })
                     self.songModel.addSongToHistory(song: representedObject)
                 }
             }

@@ -929,7 +929,7 @@
                                                         </constraints>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSInfo" id="L5o-be-KKo"/>
                                                         <connections>
-                                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="representedObject.artwork" id="Cp1-tE-QTG"/>
+                                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="artworkImage" id="oOh-Em-xjD"/>
                                                         </connections>
                                                     </imageView>
                                                     <visualEffectView blendingMode="withinWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="umt-iP-P7k" customClass="VisualEffectViewWithRoundCorners" customModule="SpotifyAgent" customModuleProvider="target">
@@ -1146,7 +1146,7 @@
                                                     <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="58P-QP-Ogn">
                                                         <rect key="frame" x="109" y="109" width="32" height="32"/>
                                                         <connections>
-                                                            <binding destination="XfG-lQ-9wD" name="hidden" keyPath="representedObject.isImageLoading" id="Fnh-aw-Gsu">
+                                                            <binding destination="XfG-lQ-9wD" name="hidden" keyPath="representedObject.isImageLoadingMoreThanTwoSeconds" id="gdo-9p-JbN">
                                                                 <dictionary key="options">
                                                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                                 </dictionary>

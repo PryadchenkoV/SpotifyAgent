@@ -16,6 +16,7 @@ class Song: NSObject {
     var artworkURL: String
     @objc dynamic var artwork: NSImage?
     @objc dynamic var isImageLoading = true
+    @objc dynamic var isImageLoadingMoreThanTwoSeconds = false
     @objc dynamic var songURL: String
     @objc dynamic var isLastSongPlayedSong: Bool
     
@@ -63,6 +64,11 @@ class Song: NSObject {
                 self?.isImageLoading = false
             }
         }.resume()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            if let isLoading = self?.isImageLoading, isLoading {
+                self?.isImageLoadingMoreThanTwoSeconds = true
+            }
+        }
     }
     
     static func != (lhs: Song, rhs: Song) -> Bool {
