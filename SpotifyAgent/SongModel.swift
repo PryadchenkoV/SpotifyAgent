@@ -38,11 +38,29 @@ class SongModel: NSObject {
         historySongs.insert(song, at: 0)
         didChangeValue(forKey: "historySongs")
         
-        do {
-            let savedData = try NSKeyedArchiver.archivedData(withRootObject: historySongs, requiringSecureCoding: false)
-            UserDefaults.standard.set(savedData, forKey: kUserDefaultSongHistoryKey)
-        } catch {
-            os_log(.error, "Cannot archive data from historySongs")
+        saveToUserDefaults()
+    }
+    
+    func clearHistory() {
+        willChangeValue(forKey: "historySongs")
+        historySongs.removeAll()
+        didChangeValue(forKey: "historySongs")
+        
+        saveToUserDefaults()
+    }
+    
+    private func saveToUserDefaults() {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            guard let self = self else {
+                os_log(.error, "Self is nil")
+                return
+            }
+            do {
+                let savedData = try NSKeyedArchiver.archivedData(withRootObject: self.historySongs, requiringSecureCoding: false)
+                UserDefaults.standard.set(savedData, forKey: self.kUserDefaultSongHistoryKey)
+            } catch {
+                os_log(.error, "Cannot archive data from historySongs")
+            }
         }
     }
     

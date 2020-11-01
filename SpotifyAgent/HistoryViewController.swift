@@ -23,6 +23,13 @@ class HistoryViewController: NSViewController, NSTableViewDelegate {
         super.viewWillAppear()
     }
     
+    @IBAction func clearHistory(_ sender: AnyObject) {
+        tableView.removeRows(at: IndexSet(integersIn: 0..<tableView.numberOfRows), withAnimation: .slideRight)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            SongModel.shared.clearHistory()
+        }
+    }
+    
     @IBAction func tableViewDoubleClick(_ sender: AnyObject) {
         guard tableView.selectedRow >= 0,
             let arrangedObjects = arrayController.arrangedObjects as? [Song] else {

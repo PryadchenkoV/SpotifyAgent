@@ -26,6 +26,8 @@ class TrackViewController: NSViewController {
     
     @IBOutlet var popoverMenu: NSMenu!
     @IBOutlet weak var viewToPlacePopover: NSView!
+    @IBOutlet weak var historyViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var historyView: NSView!
     
     @objc dynamic var isTrackPaused = true
     @objc dynamic var isApplicationRunning = false
@@ -33,6 +35,7 @@ class TrackViewController: NSViewController {
     @objc dynamic var isHistoryShown = false
     
     let songModel = SongModel.shared
+    private let historyViewWidth: CGFloat = 150
     
     var timerRenewInformation: Timer?
     var timerApplicationRunning: Timer?
@@ -63,6 +66,10 @@ class TrackViewController: NSViewController {
                 self.renewInformation()
             }
         })
+        historyViewWidthConstraint.constant = 0
+        historyView.isHidden = !isHistoryShown
+        
+        NSApp.mainWindow?.initialFirstResponder = viewToPlacePopover
     }
     
     override func viewWillAppear() {
@@ -84,9 +91,15 @@ class TrackViewController: NSViewController {
         })
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        NSApp.mainWindow?.makeFirstResponder(viewToPlacePopover)
+    }
+    
     override func viewDidDisappear() {
         super.viewDidDisappear()
         isHistoryShown = false
+        historyViewWidthConstraint.constant = 0
     }
     
     deinit {
@@ -176,7 +189,7 @@ class TrackViewController: NSViewController {
     
     @IBAction func runApplicationButtonPushed(_ sender: Any) {
         isApplicationLaunching = true
-        DispatchQueue.global(qos: .default).async { [weak self] in
+        DispatchQueue.global(qos: .default).async {
             runAppleScript(withName: runApplication, successBlock: nil)
         }
     }
@@ -193,8 +206,14 @@ class TrackViewController: NSViewController {
             return
         }
         
+        var copyText = "\(song.name) - \(song.artist)"
+        let componentsOfURL = song.songURL.split(separator: ":")
+        if let trackID = componentsOfURL.last {
+            let songURL = "https://open.spotify.com/track/\(trackID)"
+            copyText += " \(songURL)"
+        }
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString("\(song.name) - \(song.artist)", forType: .string)
+        NSPasteboard.general.setString(copyText, forType: .string)
         
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         guard let viewController = storyboard.instantiateController(withIdentifier: "CopiedPopover") as? NSViewController else {
@@ -214,7 +233,17 @@ class TrackViewController: NSViewController {
         }
     }
     @IBAction func showHistoryPushed(_ sender: Any) {
+        if !isHistoryShown {
+            historyView.isHidden = false
+            historyViewWidthConstraint.constant = 0
+        }
         isHistoryShown.toggle()
+        NSAnimationContext.runAnimationGroup({ (context) in
+            context.duration = 0.2
+            historyViewWidthConstraint.animator().constant = isHistoryShown ? self.historyViewWidth : 0.0
+        }) {
+            self.historyView.isHidden = !self.isHistoryShown
+        }
     }
 }
 

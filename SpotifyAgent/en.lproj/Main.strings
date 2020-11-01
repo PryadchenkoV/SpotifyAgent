@@ -144,7 +144,7 @@
 "FKE-Sm-Kum.title" = "SpotifyAgent Help";
 
 /* Class = "NSMenuItem"; title = "Oπen åpp"; ObjectID = "Fnp-MQ-YMc"; */
-"Fnp-MQ-YMc.title" = "Open App";
+"Fnp-MQ-YMc.title" = "Open Spotify";
 
 /* Class = "NSMenuItem"; title = "Bold"; ObjectID = "GB9-OM-e27"; */
 "GB9-OM-e27.title" = "Bold";
@@ -286,6 +286,9 @@
 
 /* Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL"; */
 "Ptp-SP-VEL.title" = "Bigger";
+
+/* Class = "NSButtonCell"; title = "Cléar History"; ObjectID = "pUu-0R-13e"; */
+"pUu-0R-13e.title" = "Clear History";
 
 /* Class = "NSMenuItem"; title = "Save…"; ObjectID = "pxx-59-PXV"; */
 "pxx-59-PXV.title" = "Save…";

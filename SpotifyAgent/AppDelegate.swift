@@ -46,6 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             eventMonitor?.start()
+            NSApp.activate(ignoringOtherApps: true)
         }
     }
     

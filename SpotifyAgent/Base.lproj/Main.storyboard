@@ -876,13 +876,6 @@
                                                     <constraint firstItem="bVo-Cn-Sa9" firstAttribute="leading" secondItem="61T-jt-FLb" secondAttribute="leading" id="iDY-DF-em5"/>
                                                     <constraint firstAttribute="bottom" secondItem="bVo-Cn-Sa9" secondAttribute="bottom" id="r2c-Gp-kWC"/>
                                                 </constraints>
-                                                <connections>
-                                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isHistoryShown" id="1fE-ea-vVi">
-                                                        <dictionary key="options">
-                                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                        </dictionary>
-                                                    </binding>
-                                                </connections>
                                             </customView>
                                             <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FRO-22-zbF">
                                                 <rect key="frame" x="150" y="0.0" width="250" height="250"/>
@@ -898,16 +891,6 @@
                                                             <binding destination="XfG-lQ-9wD" name="value" keyPath="representedObject.artwork" id="Cp1-tE-QTG"/>
                                                         </connections>
                                                     </imageView>
-                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="ctH-6n-dXJ">
-                                                        <rect key="frame" x="97" y="66" width="56" height="59"/>
-                                                        <gestureRecognizers>
-                                                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="5Fv-eT-r1V">
-                                                                <connections>
-                                                                    <action selector="nameOrAuthorPushed:" target="XfG-lQ-9wD" id="fpb-eP-6Nt"/>
-                                                                </connections>
-                                                            </clickGestureRecognizer>
-                                                        </gestureRecognizers>
-                                                    </customView>
                                                     <visualEffectView blendingMode="withinWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="umt-iP-P7k" customClass="VisualEffectViewWithRoundCorners" customModule="SpotifyAgent" customModuleProvider="target">
                                                         <rect key="frame" x="99" y="66" width="53" height="24"/>
                                                         <subviews>
@@ -1227,6 +1210,16 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </visualEffectView>
+                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="ctH-6n-dXJ">
+                                                        <rect key="frame" x="97" y="66" width="56" height="59"/>
+                                                        <gestureRecognizers>
+                                                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="5Fv-eT-r1V">
+                                                                <connections>
+                                                                    <action selector="nameOrAuthorPushed:" target="XfG-lQ-9wD" id="fpb-eP-6Nt"/>
+                                                                </connections>
+                                                            </clickGestureRecognizer>
+                                                        </gestureRecognizers>
+                                                    </customView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="umc-DQ-K8y" secondAttribute="trailing" constant="10" id="2dU-zb-d8R"/>
@@ -1307,6 +1300,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="historyView" destination="61T-jt-FLb" id="q22-un-r6g"/>
+                        <outlet property="historyViewWidthConstraint" destination="PpF-o5-JmC" id="jVk-mm-dHa"/>
                         <outlet property="popoverMenu" destination="O0y-17-TIw" id="4vJ-vP-0xm"/>
                         <outlet property="viewToPlacePopover" destination="ctH-6n-dXJ" id="Igz-hF-yC5"/>
                     </connections>
@@ -1388,34 +1383,39 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" placeholder="YES" id="G6e-IA-Itr"/>
+                                            <constraint firstItem="Dip-jm-3Vy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Klm-Yo-xzq" secondAttribute="top" constant="75" id="Iq6-MV-OGI"/>
                                             <constraint firstItem="Dip-jm-3Vy" firstAttribute="centerY" secondItem="Klm-Yo-xzq" secondAttribute="centerY" id="TNY-Ff-8gc"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dip-jm-3Vy" secondAttribute="trailing" constant="8" id="UWE-Ts-adz"/>
                                             <constraint firstItem="Dip-jm-3Vy" firstAttribute="centerX" secondItem="Klm-Yo-xzq" secondAttribute="centerX" id="VpM-Aa-BlO"/>
                                             <constraint firstItem="Dip-jm-3Vy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Klm-Yo-xzq" secondAttribute="leading" constant="8" id="Xzv-0a-54g"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Dip-jm-3Vy" secondAttribute="bottom" constant="75" id="YoR-SM-m5l"/>
                                         </constraints>
                                         <connections>
                                             <binding destination="sSj-zC-lvR" name="hidden" keyPath="arrangedObjects.@count" id="gwc-QA-kIR"/>
                                         </connections>
                                     </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="WNU-vK-Grd">
+                                    <customView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="WNU-vK-Grd">
                                         <rect key="frame" x="0.0" y="0.0" width="448" height="250"/>
                                         <subviews>
-                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="WKj-oR-iCe">
-                                                <rect key="frame" x="193" y="207" width="63" height="35"/>
+                                            <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="WKj-oR-iCe">
+                                                <rect key="frame" x="193" y="222" width="63" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="br4-C8-wZs"/>
+                                                </constraints>
                                                 <textFieldCell key="cell" title="Hisør¥" id="E8Q-e1-B5U">
                                                     <font key="font" metaFont="systemBold" size="18"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="47" horizontalPageScroll="10" verticalLineScroll="47" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAU-Cd-qVQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="448" height="199"/>
+                                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAU-Cd-qVQ">
+                                                <rect key="frame" x="0.0" y="38" width="448" height="176"/>
                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="l0A-nm-LYc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="448" height="199"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="448" height="176"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="45" viewBased="YES" id="tKk-At-Byi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="448" height="199"/>
+                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="43" viewBased="YES" id="tKk-At-Byi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="448" height="176"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1466,7 +1466,7 @@
                                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7UL-kp-5fW">
                                                                                     <rect key="frame" x="42" y="9" width="36" height="14"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" title="årtîst]" id="zoE-TY-2gp">
-                                                                                        <font key="font" metaFont="system" size="11"/>
+                                                                                        <font key="font" metaFont="smallSystem"/>
                                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
@@ -1517,19 +1517,59 @@
                                                 </scroller>
                                             </scrollView>
                                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0av-iB-bIr">
-                                                <rect key="frame" x="0.0" y="196" width="448" height="5"/>
+                                                <rect key="frame" x="0.0" y="211" width="448" height="5"/>
+                                            </box>
+                                            <box borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="diw-Lf-bsL">
+                                                <rect key="frame" x="-3" y="-4" width="454" height="31"/>
+                                                <view key="contentView" id="PVr-9H-gd0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="454" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="0K6-Za-bZk">
+                                                            <rect key="frame" x="168" y="-1" width="119" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="Cléar History" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pUu-0R-13e">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="clearHistory:" target="fxK-Bj-PTt" id="xpU-sa-O7A"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0K6-Za-bZk" secondAttribute="trailing" constant="5" id="4yk-lC-aYV"/>
+                                                        <constraint firstItem="0K6-Za-bZk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PVr-9H-gd0" secondAttribute="leading" constant="5" id="6R6-jm-PgN"/>
+                                                        <constraint firstItem="0K6-Za-bZk" firstAttribute="centerY" secondItem="PVr-9H-gd0" secondAttribute="centerY" constant="-1" id="HQX-4J-cV3"/>
+                                                        <constraint firstItem="0K6-Za-bZk" firstAttribute="centerX" secondItem="PVr-9H-gd0" secondAttribute="centerX" id="HRR-da-biv"/>
+                                                    </constraints>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="8ok-8Y-Nv2"/>
+                                                </constraints>
+                                                <attributedString key="userComments">
+                                                    <fragment content="#bc-ignore!"/>
+                                                </attributedString>
+                                            </box>
+                                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="iab-PC-hbh">
+                                                <rect key="frame" x="0.0" y="23" width="448" height="9"/>
                                             </box>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="NAU-Cd-qVQ" firstAttribute="leading" secondItem="WNU-vK-Grd" secondAttribute="leading" id="6bD-uL-pUJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="iab-PC-hbh" secondAttribute="trailing" id="Ckz-YQ-vV0"/>
+                                            <constraint firstAttribute="trailing" secondItem="diw-Lf-bsL" secondAttribute="trailing" id="Eyx-tf-eST"/>
                                             <constraint firstItem="0av-iB-bIr" firstAttribute="leading" secondItem="WNU-vK-Grd" secondAttribute="leading" id="JQL-vN-O6N"/>
+                                            <constraint firstItem="iab-PC-hbh" firstAttribute="top" secondItem="NAU-Cd-qVQ" secondAttribute="bottom" constant="8" id="KbF-k4-Awl"/>
                                             <constraint firstAttribute="trailing" secondItem="NAU-Cd-qVQ" secondAttribute="trailing" id="M4I-Ac-nsj"/>
+                                            <constraint firstItem="iab-PC-hbh" firstAttribute="leading" secondItem="WNU-vK-Grd" secondAttribute="leading" id="VlN-uG-SLA"/>
                                             <constraint firstItem="NAU-Cd-qVQ" firstAttribute="top" secondItem="0av-iB-bIr" secondAttribute="top" id="c58-aQ-tos"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WKj-oR-iCe" secondAttribute="trailing" constant="8" id="cdd-PX-4ip"/>
-                                            <constraint firstAttribute="bottom" secondItem="NAU-Cd-qVQ" secondAttribute="bottom" id="ey0-vO-4Ud"/>
+                                            <constraint firstItem="diw-Lf-bsL" firstAttribute="leading" secondItem="WNU-vK-Grd" secondAttribute="leading" id="foE-yq-QWc"/>
                                             <constraint firstItem="WKj-oR-iCe" firstAttribute="top" secondItem="WNU-vK-Grd" secondAttribute="top" constant="8" id="ggp-yy-OSo"/>
+                                            <constraint firstAttribute="bottom" secondItem="diw-Lf-bsL" secondAttribute="bottom" id="gyy-rb-lww"/>
                                             <constraint firstItem="WKj-oR-iCe" firstAttribute="centerX" secondItem="WNU-vK-Grd" secondAttribute="centerX" id="lTk-GG-weM"/>
                                             <constraint firstAttribute="height" constant="250" placeholder="YES" id="ndS-ij-w5O"/>
+                                            <constraint firstItem="diw-Lf-bsL" firstAttribute="top" secondItem="iab-PC-hbh" secondAttribute="bottom" id="prR-5W-5zV"/>
                                             <constraint firstItem="WKj-oR-iCe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WNU-vK-Grd" secondAttribute="leading" constant="8" id="uCC-xb-bPX"/>
                                             <constraint firstItem="0av-iB-bIr" firstAttribute="top" secondItem="WKj-oR-iCe" secondAttribute="bottom" constant="8" id="xtd-Nf-mlK"/>
                                             <constraint firstAttribute="trailing" secondItem="0av-iB-bIr" secondAttribute="trailing" id="zvL-c2-FPF"/>
@@ -1579,7 +1619,7 @@
                 </arrayController>
                 <customObject id="GQS-YI-U2U" customClass="ModelDataSource" customModule="SpotifyAgent" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="239" y="1065"/>
+            <point key="canvasLocation" x="239" y="1054"/>
         </scene>
     </scenes>
     <resources>
