@@ -30,6 +30,7 @@ class TrackViewController: NSViewController {
     @IBOutlet weak var historyView: NSView!
     
     @objc dynamic var isTrackPaused = true
+    @objc dynamic var isApplicationInstalled = false
     @objc dynamic var isApplicationRunning = false
     @objc dynamic var isApplicationLaunching = false
     @objc dynamic var isHistoryShown = false
@@ -37,6 +38,7 @@ class TrackViewController: NSViewController {
     let songModel = SongModel.shared
     private let historyViewWidth: CGFloat = 150
     
+    var timerApplicationInstalled: Timer?
     var timerRenewInformation: Timer?
     var timerApplicationRunning: Timer?
     
@@ -44,13 +46,28 @@ class TrackViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        renewApplicationState()
+        renewAppInstalled()
+        if isApplicationInstalled {
+            renewApplicationState()
+        }
         
         NotificationCenter.default.addObserver(forName: kNeedRefreshNotificationName, object: nil, queue: .main) { [weak self] (_) in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                 self?.renewInformation()
             }
         }
+        
+        timerApplicationInstalled = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] (timer) in
+            guard let self = self else {
+                os_log("Self is nil, return")
+                return
+            }
+            self.renewAppInstalled()
+            if self.isApplicationInstalled {
+                timer.invalidate()
+                self.startMonitoringApplicationOnAppInstalled()
+            }
+        })
         
         timerApplicationRunning = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { [weak self] (_) in
             self?.renewApplicationState()
@@ -75,6 +92,15 @@ class TrackViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
+        renewAppInstalled()
+        if isApplicationInstalled {
+            startMonitoringApplicationOnAppInstalled()
+        } else {
+            timerApplicationInstalled?.fire()
+        }
+    }
+    
+    func startMonitoringApplicationOnAppInstalled() {
         renewApplicationState()
         if isApplicationRunning {
             startMonitoringApplication()
@@ -106,7 +132,7 @@ class TrackViewController: NSViewController {
         NotificationCenter.default.removeObserver(self)
         observer?.invalidate()
     }
-    
+
     func startMonitoringApplication() {
         timerRenewInformation?.fire()
         
@@ -123,6 +149,14 @@ class TrackViewController: NSViewController {
     func renewApplicationState() {
         runAppleScript(withName: getApplicationRunning) { [weak self] (result) in
             self?.isApplicationRunning = result.booleanValue
+        }
+    }
+    
+    func renewAppInstalled() {
+        runAppleScript(withName: getSpotifyInstalled) { [weak self] (result) in
+            self?.willChangeValue(forKey: "isApplicationInstalled")
+            self?.isApplicationInstalled = result.booleanValue
+            self?.didChangeValue(forKey: "isApplicationInstalled")
         }
     }
     

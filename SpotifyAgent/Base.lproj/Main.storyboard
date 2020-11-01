@@ -696,12 +696,12 @@
                                         <rect key="frame" x="0.0" y="250" width="400" height="158"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hz7-vH-3xH">
-                                                <rect key="frame" x="156" y="8" width="108" height="42"/>
+                                                <rect key="frame" x="156" y="8" width="108" height="21"/>
                                                 <subviews>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cco-Jv-IGn">
-                                                        <rect key="frame" x="4" y="21" width="104" height="21"/>
+                                                        <rect key="frame" x="4" y="0.0" width="104" height="21"/>
                                                         <subviews>
-                                                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZH5-8R-TJJ">
+                                                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ZH5-8R-TJJ" userLabel="Run App">
                                                                 <rect key="frame" x="-6" y="-7" width="92" height="32"/>
                                                                 <buttonCell key="cell" type="push" title="Rün App" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pJD-f9-mVU">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -738,8 +738,8 @@
                                                             <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isApplicationRunning" id="ID8-EG-ynB"/>
                                                         </connections>
                                                     </customView>
-                                                    <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="r3c-T2-LxX">
-                                                        <rect key="frame" x="-6" y="-7" width="101" height="32"/>
+                                                    <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="r3c-T2-LxX" userLabel="Open App">
+                                                        <rect key="frame" x="-6" y="-7" width="101" height="11"/>
                                                         <buttonCell key="cell" type="push" title="Opén App" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SFa-1R-tnG">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -766,22 +766,49 @@
                                                     <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                 </customSpacing>
+                                                <connections>
+                                                    <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isApplicationInstalled" id="Xmy-Xa-DUj">
+                                                        <dictionary key="options">
+                                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                </connections>
                                             </stackView>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C03-Jh-RUS">
-                                                <rect key="frame" x="85" y="58" width="230" height="62"/>
+                                                <rect key="frame" x="85" y="37" width="230" height="83"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fw5-2B-lr3">
-                                                        <rect key="frame" x="-2" y="30" width="234" height="32"/>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="7c9-BO-Taq" userLabel="App is not running">
+                                                        <rect key="frame" x="-2" y="53" width="234" height="30"/>
+                                                        <textFieldCell key="cell" selectable="YES" alignment="center" title="App is not installed" id="Fow-sT-G8K">
+                                                            <font key="font" metaFont="systemSemibold" size="26"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isApplicationInstalled" id="euU-ii-vwu"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fw5-2B-lr3" userLabel="App is not running">
+                                                        <rect key="frame" x="-2" y="30" width="234" height="23"/>
                                                         <textFieldCell key="cell" selectable="YES" alignment="center" title="Aπp iß nøt runñing" id="v11-rj-LCa">
                                                             <font key="font" metaFont="systemSemibold" size="26"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <binding destination="XfG-lQ-9wD" name="hidden2" keyPath="isApplicationInstalled" previousBinding="kXj-LS-Gjb" id="Gqz-Wk-vdN">
+                                                                <dictionary key="options">
+                                                                    <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                                    <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                                    <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                                    <integer key="NSNullPlaceholder" value="-1"/>
+                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                </dictionary>
+                                                            </binding>
                                                             <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isApplicationRunning" id="kXj-LS-Gjb"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="r70-vz-8Fb">
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="r70-vz-8Fb" userLabel="Nothing is playing">
                                                         <rect key="frame" x="-2" y="0.0" width="234" height="30"/>
                                                         <textFieldCell key="cell" selectable="YES" alignment="center" title="Nøthing is plåying" id="tMa-UO-qsz">
                                                             <font key="font" metaFont="systemSemibold" size="26"/>
@@ -789,6 +816,15 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <binding destination="XfG-lQ-9wD" name="hidden2" keyPath="isApplicationInstalled" previousBinding="SoA-XJ-HLn" id="RjW-87-xGG">
+                                                                <dictionary key="options">
+                                                                    <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                                    <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                                    <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                                    <integer key="NSNullPlaceholder" value="-1"/>
+                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                </dictionary>
+                                                            </binding>
                                                             <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isApplicationRunning" id="SoA-XJ-HLn">
                                                                 <dictionary key="options">
                                                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
@@ -798,22 +834,27 @@
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="7c9-BO-Taq" secondAttribute="trailing" id="3R4-Ta-atF"/>
                                                     <constraint firstItem="r70-vz-8Fb" firstAttribute="top" secondItem="fw5-2B-lr3" secondAttribute="bottom" id="BUC-3d-LZD"/>
                                                     <constraint firstAttribute="bottom" secondItem="r70-vz-8Fb" secondAttribute="bottom" id="H23-uh-8f4"/>
+                                                    <constraint firstItem="fw5-2B-lr3" firstAttribute="top" secondItem="7c9-BO-Taq" secondAttribute="bottom" id="P6r-lt-cx3"/>
                                                     <constraint firstItem="r70-vz-8Fb" firstAttribute="leading" secondItem="C03-Jh-RUS" secondAttribute="leading" id="Pq0-Bs-1am"/>
-                                                    <constraint firstItem="fw5-2B-lr3" firstAttribute="top" secondItem="C03-Jh-RUS" secondAttribute="top" id="UNd-0w-P6O"/>
+                                                    <constraint firstItem="7c9-BO-Taq" firstAttribute="top" secondItem="C03-Jh-RUS" secondAttribute="top" id="a1b-Ji-AGm"/>
                                                     <constraint firstAttribute="trailing" secondItem="r70-vz-8Fb" secondAttribute="trailing" id="bhs-0G-bfx"/>
                                                     <constraint firstAttribute="trailing" secondItem="fw5-2B-lr3" secondAttribute="trailing" id="g17-af-znu"/>
                                                     <constraint firstItem="r70-vz-8Fb" firstAttribute="centerX" secondItem="C03-Jh-RUS" secondAttribute="centerX" id="meD-yA-TZg"/>
                                                     <constraint firstItem="fw5-2B-lr3" firstAttribute="leading" secondItem="C03-Jh-RUS" secondAttribute="leading" id="mjK-UU-xCN"/>
+                                                    <constraint firstItem="7c9-BO-Taq" firstAttribute="leading" secondItem="C03-Jh-RUS" secondAttribute="leading" id="nTA-Dh-Inh"/>
                                                     <constraint firstAttribute="width" constant="230" id="pct-nh-gzB"/>
                                                     <constraint firstItem="fw5-2B-lr3" firstAttribute="centerX" secondItem="C03-Jh-RUS" secondAttribute="centerX" id="yke-j7-Wdf"/>
                                                 </constraints>
                                                 <visibilityPriorities>
                                                     <integer value="1000"/>
                                                     <integer value="1000"/>
+                                                    <integer value="1000"/>
                                                 </visibilityPriorities>
                                                 <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                 </customSpacing>
@@ -1313,6 +1354,11 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="runApplicationButtonPushed:" target="XfG-lQ-9wD" id="Szx-fc-e1a"/>
+                                <binding destination="XfG-lQ-9wD" name="hidden" keyPath="isApplicationInstalled" id="sZh-8d-Fov">
+                                    <dictionary key="options">
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
                             </connections>
                         </menuItem>
                         <menuItem title="Œuit" id="hUp-d5-Jjq" userLabel="Qüit">
@@ -1363,17 +1409,17 @@
             <objects>
                 <viewController id="fxK-Bj-PTt" customClass="HistoryViewController" customModule="SpotifyAgent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="lP7-cF-PLd">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="468" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4l-uj-0PL">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                                <rect key="frame" x="0.0" y="0.0" width="468" height="500"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Klm-Yo-xzq">
-                                        <rect key="frame" x="0.0" y="250" width="450" height="250"/>
+                                        <rect key="frame" x="0.0" y="250" width="468" height="250"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-jm-3Vy">
-                                                <rect key="frame" x="152" y="115" width="146" height="21"/>
+                                                <rect key="frame" x="161" y="115" width="146" height="21"/>
                                                 <textFieldCell key="cell" alignment="center" title="Hîstory îs émpty" id="rWW-ez-kFG">
                                                     <font key="font" metaFont="systemSemibold" size="18"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1395,10 +1441,10 @@
                                         </connections>
                                     </customView>
                                     <customView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="WNU-vK-Grd">
-                                        <rect key="frame" x="0.0" y="0.0" width="448" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="457" height="250"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="WKj-oR-iCe">
-                                                <rect key="frame" x="193" y="222" width="63" height="20"/>
+                                                <rect key="frame" x="197" y="222" width="63" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="br4-C8-wZs"/>
                                                 </constraints>
@@ -1409,21 +1455,20 @@
                                                 </textFieldCell>
                                             </textField>
                                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAU-Cd-qVQ">
-                                                <rect key="frame" x="0.0" y="38" width="448" height="176"/>
+                                                <rect key="frame" x="0.0" y="47" width="457" height="167"/>
                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="l0A-nm-LYc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="448" height="176"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="457" height="167"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="43" viewBased="YES" id="tKk-At-Byi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="448" height="176"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="457" height="167"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             <tableColumns>
-                                                                <tableColumn width="445" minWidth="40" maxWidth="1000" id="SaH-RT-atA">
+                                                                <tableColumn width="436" minWidth="40" maxWidth="1000" id="SaH-RT-atA">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                        <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -1438,7 +1483,7 @@
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView id="MoZ-Rk-yTV">
-                                                                            <rect key="frame" x="1" y="1" width="445" height="49"/>
+                                                                            <rect key="frame" x="1" y="1" width="436" height="49"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vTP-aC-QEc">
@@ -1475,7 +1520,7 @@
                                                                                     </connections>
                                                                                 </textField>
                                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="YnC-vv-QEY">
-                                                                                    <rect key="frame" x="20" y="46" width="425" height="5"/>
+                                                                                    <rect key="frame" x="20" y="46" width="416" height="5"/>
                                                                                     <connections>
                                                                                         <binding destination="MoZ-Rk-yTV" name="hidden" keyPath="objectValue.isLastSongPlayedSong" id="CfG-8s-f6M"/>
                                                                                     </connections>
@@ -1508,7 +1553,7 @@
                                                     <nil key="backgroundColor"/>
                                                 </clipView>
                                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="qN7-bt-BLO">
-                                                    <rect key="frame" x="0.0" y="184" width="448" height="16"/>
+                                                    <rect key="frame" x="0.0" y="183" width="448" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="9Xm-l6-AXz">
@@ -1517,16 +1562,16 @@
                                                 </scroller>
                                             </scrollView>
                                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0av-iB-bIr">
-                                                <rect key="frame" x="0.0" y="211" width="448" height="5"/>
+                                                <rect key="frame" x="0.0" y="211" width="457" height="5"/>
                                             </box>
                                             <box borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="diw-Lf-bsL">
-                                                <rect key="frame" x="-3" y="-4" width="454" height="31"/>
+                                                <rect key="frame" x="-3" y="-4" width="463" height="31"/>
                                                 <view key="contentView" id="PVr-9H-gd0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="454" height="31"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="463" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="0K6-Za-bZk">
-                                                            <rect key="frame" x="168" y="-1" width="119" height="32"/>
+                                                            <rect key="frame" x="172" y="-1" width="119" height="32"/>
                                                             <buttonCell key="cell" type="push" title="Cléar History" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pUu-0R-13e">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1551,7 +1596,7 @@
                                                 </attributedString>
                                             </box>
                                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="iab-PC-hbh">
-                                                <rect key="frame" x="0.0" y="23" width="448" height="9"/>
+                                                <rect key="frame" x="0.0" y="23" width="457" height="18"/>
                                             </box>
                                         </subviews>
                                         <constraints>
