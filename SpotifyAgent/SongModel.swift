@@ -15,6 +15,8 @@ class SongModel: NSObject {
     private let kUserDefaultSongHistoryKey = "SongHistoryArray"
     static var shared: SongModel = SongModel()
     
+    @objc dynamic var currentPlayingSong: Song?
+    
     private override init() {
         if let savedData = UserDefaults.standard.object(forKey: kUserDefaultSongHistoryKey) as? Data, let savedHistory = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedData) as? [Song] {
             historySongs = savedHistory
@@ -27,6 +29,12 @@ class SongModel: NSObject {
                 self.historySongs.removeLast()
             }
         }
+    }
+    
+    func setCurrentPlayingSong(_ song: Song) {
+        willChangeValue(forKey: "currentPlayingSong")
+        currentPlayingSong = song
+        didChangeValue(forKey: "currentPlayingSong")
     }
     
     func addSongToHistory(song: Song) {

@@ -131,6 +131,9 @@
 /* Class = "NSTextFieldCell"; title = "Hisør¥"; ObjectID = "E8Q-e1-B5U"; */
 "E8Q-e1-B5U.title" = "History";
 
+/* Class = "NSTextFieldCell"; title = "L¥rics"; ObjectID = "Efk-5g-eot"; */
+"Efk-5g-eot.title" = "Lyrics";
+
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "Help";
 
@@ -229,6 +232,9 @@
 
 /* Class = "NSMenuItem"; title = "Show Sidebar"; ObjectID = "kIP-vf-haE"; */
 "kIP-vf-haE.title" = "Show Sidebar";
+
+/* Class = "NSTextFieldCell"; title = "Cån't find L¥rics :("; ObjectID = "L6V-gY-POW"; */
+"L6V-gY-POW.title" = "Can't find lyrics for this song :(";
 
 /* Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "Lbh-J2-qVU"; */
 "Lbh-J2-qVU.title" = "\tLeft to Right";

@@ -686,17 +686,17 @@
             <objects>
                 <viewController storyboardIdentifier="TrackViewController" id="XfG-lQ-9wD" customClass="TrackViewController" customModule="SpotifyAgent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" misplaced="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="408"/>
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="408"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView wantsLayer="YES" distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYb-q4-Ion">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="408"/>
+                                <rect key="frame" x="0.0" y="0.0" width="650" height="408"/>
                                 <subviews>
                                     <customView horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="TsE-EW-8fI">
-                                        <rect key="frame" x="0.0" y="250" width="400" height="158"/>
+                                        <rect key="frame" x="0.0" y="250" width="650" height="158"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hz7-vH-3xH">
-                                                <rect key="frame" x="156" y="8" width="108" height="21"/>
+                                                <rect key="frame" x="281" y="8" width="108" height="21"/>
                                                 <subviews>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cco-Jv-IGn">
                                                         <rect key="frame" x="4" y="0.0" width="104" height="21"/>
@@ -775,7 +775,7 @@
                                                 </connections>
                                             </stackView>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C03-Jh-RUS">
-                                                <rect key="frame" x="85" y="37" width="230" height="83"/>
+                                                <rect key="frame" x="210" y="37" width="230" height="83"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="7c9-BO-Taq" userLabel="App is not running">
                                                         <rect key="frame" x="-2" y="53" width="234" height="30"/>
@@ -860,7 +860,7 @@
                                                 </customSpacing>
                                             </stackView>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="BSs-DF-NoR">
-                                                <rect key="frame" x="366" y="124" width="24" height="24"/>
+                                                <rect key="frame" x="616" y="124" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="HcO-Jg-FRM"/>
                                                     <constraint firstAttribute="width" constant="24" id="yeM-0a-K6l"/>
@@ -897,10 +897,29 @@
                                         </connections>
                                     </customView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YqF-3Q-wud">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="650" height="250"/>
                                         <subviews>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="XGV-ur-Qql" userLabel="Lyrics View">
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                                <subviews>
+                                                    <containerView translatesAutoresizingMaskIntoConstraints="NO" id="cQv-Nw-Z0b">
+                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                                        <connections>
+                                                            <segue destination="s9q-pQ-qaH" kind="embed" identifier="LyricsViewControllerSegue" id="2iC-ij-5fV"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="cQv-Nw-Z0b" secondAttribute="trailing" id="3jI-cm-bnh"/>
+                                                    <constraint firstItem="cQv-Nw-Z0b" firstAttribute="leading" secondItem="XGV-ur-Qql" secondAttribute="leading" id="E6u-xw-Nwu"/>
+                                                    <constraint firstItem="cQv-Nw-Z0b" firstAttribute="top" secondItem="XGV-ur-Qql" secondAttribute="top" id="EeY-Om-Ruu"/>
+                                                    <constraint firstAttribute="width" constant="250" id="IOa-wW-Hyv"/>
+                                                    <constraint firstAttribute="height" constant="250" id="OhS-J7-zId"/>
+                                                    <constraint firstAttribute="bottom" secondItem="cQv-Nw-Z0b" secondAttribute="bottom" id="R0E-jE-OSp"/>
+                                                </constraints>
+                                            </customView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="61T-jt-FLb">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="250"/>
+                                                <rect key="frame" x="250" y="0.0" width="150" height="250"/>
                                                 <subviews>
                                                     <containerView translatesAutoresizingMaskIntoConstraints="NO" id="bVo-Cn-Sa9">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="250"/>
@@ -919,7 +938,7 @@
                                                 </constraints>
                                             </customView>
                                             <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FRO-22-zbF">
-                                                <rect key="frame" x="150" y="0.0" width="250" height="250"/>
+                                                <rect key="frame" x="400" y="0.0" width="250" height="250"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xlP-ui-12i">
                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
@@ -1261,6 +1280,37 @@
                                                             </clickGestureRecognizer>
                                                         </gestureRecognizers>
                                                     </customView>
+                                                    <visualEffectView blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="j3Y-YM-DUT" customClass="VisualEffectViewWithRoundCorners" customModule="SpotifyAgent" customModuleProvider="target">
+                                                        <rect key="frame" x="8" y="176" width="28" height="28"/>
+                                                        <subviews>
+                                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="O5r-8z-YHe">
+                                                                <rect key="frame" x="2" y="2" width="24" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="24" id="Kxe-9x-E8p"/>
+                                                                    <constraint firstAttribute="width" constant="24" id="Qdl-pe-uzp"/>
+                                                                </constraints>
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSTouchBarNewMessageTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ySn-Ea-p4v">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <action selector="showLyricsPushed:" target="XfG-lQ-9wD" id="svL-No-Anb"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="O5r-8z-YHe" secondAttribute="bottom" constant="2" id="KdW-t6-uSz"/>
+                                                            <constraint firstItem="O5r-8z-YHe" firstAttribute="leading" secondItem="j3Y-YM-DUT" secondAttribute="leading" constant="2" id="OKT-cb-g7s"/>
+                                                            <constraint firstAttribute="trailing" secondItem="O5r-8z-YHe" secondAttribute="trailing" constant="2" id="Pvb-kg-fUq"/>
+                                                            <constraint firstItem="O5r-8z-YHe" firstAttribute="top" secondItem="j3Y-YM-DUT" secondAttribute="top" constant="2" id="YWQ-wk-bgX"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </visualEffectView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="umc-DQ-K8y" secondAttribute="trailing" constant="10" id="2dU-zb-d8R"/>
@@ -1281,6 +1331,7 @@
                                                     <constraint firstItem="umc-DQ-K8y" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FRO-22-zbF" secondAttribute="leading" constant="10" id="b1o-XW-SPQ"/>
                                                     <constraint firstItem="xlP-ui-12i" firstAttribute="leading" secondItem="FRO-22-zbF" secondAttribute="leading" id="c9g-7u-CIx"/>
                                                     <constraint firstItem="58P-QP-Ogn" firstAttribute="centerY" secondItem="xlP-ui-12i" secondAttribute="centerY" id="dVU-ua-CZB"/>
+                                                    <constraint firstItem="j3Y-YM-DUT" firstAttribute="top" secondItem="iJ8-nb-xkE" secondAttribute="bottom" constant="10" id="eaA-mB-qqh"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="umt-iP-P7k" secondAttribute="trailing" constant="10" id="fR3-fd-J9I"/>
                                                     <constraint firstItem="iJ8-nb-xkE" firstAttribute="leading" secondItem="FRO-22-zbF" secondAttribute="leading" constant="8" id="msn-9a-klw"/>
                                                     <constraint firstAttribute="bottom" secondItem="xlP-ui-12i" secondAttribute="bottom" id="p74-US-hL8"/>
@@ -1288,6 +1339,7 @@
                                                     <constraint firstItem="xlP-ui-12i" firstAttribute="centerX" secondItem="FRO-22-zbF" secondAttribute="centerX" id="sZ7-FA-6s9"/>
                                                     <constraint firstAttribute="trailing" secondItem="xlP-ui-12i" secondAttribute="trailing" id="w4a-K3-QLC"/>
                                                     <constraint firstAttribute="trailing" secondItem="GWw-y4-iUB" secondAttribute="trailing" constant="8" id="wCr-iD-diC"/>
+                                                    <constraint firstItem="j3Y-YM-DUT" firstAttribute="leading" secondItem="FRO-22-zbF" secondAttribute="leading" constant="8" id="x7j-EO-V6r"/>
                                                 </constraints>
                                                 <connections>
                                                     <binding destination="XfG-lQ-9wD" name="hidden2" keyPath="isApplicationRunning" previousBinding="9YY-an-TOi" id="dRN-Rc-m3t">
@@ -1310,8 +1362,10 @@
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
@@ -1343,6 +1397,8 @@
                     <connections>
                         <outlet property="historyView" destination="61T-jt-FLb" id="q22-un-r6g"/>
                         <outlet property="historyViewWidthConstraint" destination="PpF-o5-JmC" id="jVk-mm-dHa"/>
+                        <outlet property="lyricsView" destination="XGV-ur-Qql" id="oRy-x5-Q8z"/>
+                        <outlet property="lyricsViewWidthConstraint" destination="IOa-wW-Hyv" id="r4G-2e-xgu"/>
                         <outlet property="popoverMenu" destination="O0y-17-TIw" id="4vJ-vP-0xm"/>
                         <outlet property="viewToPlacePopover" destination="ctH-6n-dXJ" id="Igz-hF-yC5"/>
                     </connections>
@@ -1370,7 +1426,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="239" y="506"/>
+            <point key="canvasLocation" x="389" y="506"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="7n3-bJ-OJ4">
@@ -1667,7 +1723,160 @@
                 </arrayController>
                 <customObject id="GQS-YI-U2U" customClass="ModelDataSource" customModule="SpotifyAgent" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="232" y="1054"/>
+            <point key="canvasLocation" x="537" y="1153"/>
+        </scene>
+        <!--Lyrics View Controller-->
+        <scene sceneID="QZv-7X-nUt">
+            <objects>
+                <viewController id="s9q-pQ-qaH" customClass="LyricsViewController" customModule="SpotifyAgent" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="1DX-xY-ZYV">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyy-UX-YhJ">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="nQO-61-m6H">
+                                        <rect key="frame" x="0.0" y="250" width="450" height="250"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Xex-nC-odz">
+                                                <rect key="frame" x="143" y="115" width="164" height="21"/>
+                                                <textFieldCell key="cell" alignment="center" title="Cån't find L¥rics :(" id="L6V-gY-POW">
+                                                    <font key="font" metaFont="systemSemibold" size="18"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xex-nC-odz" secondAttribute="trailing" constant="10" id="1Id-J7-d0U"/>
+                                            <constraint firstItem="Xex-nC-odz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nQO-61-m6H" secondAttribute="leading" constant="10" id="7kI-Zi-9iU"/>
+                                            <constraint firstItem="Xex-nC-odz" firstAttribute="centerY" secondItem="nQO-61-m6H" secondAttribute="centerY" id="8TM-kW-Sr9"/>
+                                            <constraint firstItem="Xex-nC-odz" firstAttribute="centerX" secondItem="nQO-61-m6H" secondAttribute="centerX" id="M4r-S9-2Jj"/>
+                                            <constraint firstAttribute="height" constant="250" id="PyP-PT-jG1"/>
+                                        </constraints>
+                                        <connections>
+                                            <binding destination="s9q-pQ-qaH" name="hidden" keyPath="lyrics" id="pSJ-zA-i2P">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </customView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="gjE-yX-xg0">
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
+                                        <subviews>
+                                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnF-3p-ffw">
+                                                <rect key="frame" x="10" y="0.0" width="430" height="212"/>
+                                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="ejc-OU-sjh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="430" height="212"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <textView editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" selectionGranularity="paragraph" spellingCorrection="YES" smartInsertDelete="YES" id="DN2-lD-aC6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="212"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <size key="minSize" width="430" height="212"/>
+                                                            <size key="maxSize" width="450" height="10000000"/>
+                                                            <attributedString key="textStorage">
+                                                                <fragment content="Yes">
+                                                                    <attributes>
+                                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                        <font key="NSFont" metaFont="systemMedium" size="13"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <connections>
+                                                                <binding destination="s9q-pQ-qaH" name="value" keyPath="lyrics" id="c48-yR-Ckq">
+                                                                    <dictionary key="options">
+                                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                    </dictionary>
+                                                                </binding>
+                                                            </connections>
+                                                        </textView>
+                                                    </subviews>
+                                                </clipView>
+                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="2x3-WR-yUY">
+                                                    <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </scroller>
+                                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="iH6-V1-q14">
+                                                    <rect key="frame" x="414" y="0.0" width="16" height="212"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </scroller>
+                                                <connections>
+                                                    <binding destination="VwQ-9i-Cra" name="hidden" keyPath="currentPlayingSong.lyrics" id="eG9-7c-QVZ"/>
+                                                </connections>
+                                            </scrollView>
+                                            <textField horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="cA3-Ym-WG1">
+                                                <rect key="frame" x="196" y="222" width="59" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="gnL-vc-dBD"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" title="L¥rics" id="Efk-5g-eot">
+                                                    <font key="font" metaFont="systemBold" size="18"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="lnF-3p-ffw" secondAttribute="trailing" constant="10" id="5k1-I5-Mdg"/>
+                                            <constraint firstItem="cA3-Ym-WG1" firstAttribute="top" secondItem="gjE-yX-xg0" secondAttribute="top" constant="8" id="EX5-7J-37f"/>
+                                            <constraint firstItem="lnF-3p-ffw" firstAttribute="top" secondItem="cA3-Ym-WG1" secondAttribute="bottom" constant="10" id="F7p-Pw-Npb"/>
+                                            <constraint firstAttribute="bottom" secondItem="lnF-3p-ffw" secondAttribute="bottom" id="Wty-Wf-Lga"/>
+                                            <constraint firstAttribute="height" constant="250" id="g8T-P7-aHL"/>
+                                            <constraint firstItem="cA3-Ym-WG1" firstAttribute="centerX" secondItem="gjE-yX-xg0" secondAttribute="centerX" id="rGO-Sg-CUs"/>
+                                            <constraint firstItem="lnF-3p-ffw" firstAttribute="leading" secondItem="gjE-yX-xg0" secondAttribute="leading" constant="10" id="rck-4l-2fa"/>
+                                        </constraints>
+                                        <connections>
+                                            <binding destination="s9q-pQ-qaH" name="hidden" keyPath="lyrics" id="gDo-QT-aOV">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">NSIsNil</string>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nQO-61-m6H" firstAttribute="top" secondItem="oyy-UX-YhJ" secondAttribute="top" id="0MW-jN-YtP"/>
+                                    <constraint firstAttribute="bottom" secondItem="gjE-yX-xg0" secondAttribute="bottom" id="1ba-RV-1hv"/>
+                                    <constraint firstAttribute="trailing" secondItem="nQO-61-m6H" secondAttribute="trailing" id="5dQ-yZ-ohf"/>
+                                    <constraint firstItem="gjE-yX-xg0" firstAttribute="leading" secondItem="oyy-UX-YhJ" secondAttribute="leading" id="7be-Ue-Qgg"/>
+                                    <constraint firstItem="gjE-yX-xg0" firstAttribute="top" secondItem="nQO-61-m6H" secondAttribute="bottom" id="UmA-9K-09j"/>
+                                    <constraint firstItem="gjE-yX-xg0" firstAttribute="top" secondItem="nQO-61-m6H" secondAttribute="bottom" id="hoz-Qx-QQ8"/>
+                                    <constraint firstAttribute="trailing" secondItem="gjE-yX-xg0" secondAttribute="trailing" id="kJf-QS-rtX"/>
+                                    <constraint firstItem="nQO-61-m6H" firstAttribute="leading" secondItem="oyy-UX-YhJ" secondAttribute="leading" id="vAV-uY-uTw"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="oyy-UX-YhJ" firstAttribute="leading" secondItem="1DX-xY-ZYV" secondAttribute="leading" id="Wl2-sD-qx4"/>
+                            <constraint firstItem="oyy-UX-YhJ" firstAttribute="top" secondItem="1DX-xY-ZYV" secondAttribute="top" id="bwY-Hk-rl3"/>
+                            <constraint firstAttribute="trailing" secondItem="oyy-UX-YhJ" secondAttribute="trailing" id="jeo-qA-94b"/>
+                            <constraint firstAttribute="bottom" secondItem="oyy-UX-YhJ" secondAttribute="bottom" id="z4p-p7-hVp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lyricsTextView" destination="DN2-lD-aC6" id="czL-dn-P41"/>
+                    </connections>
+                </viewController>
+                <customObject id="YuN-vh-wjL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="VwQ-9i-Cra" customClass="SongModel" customModule="SpotifyAgent" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="6" y="1140.5"/>
         </scene>
     </scenes>
     <resources>
@@ -1676,6 +1885,7 @@
         <image name="NSTouchBarFastForwardTemplate" width="22" height="30"/>
         <image name="NSTouchBarHistoryTemplate" width="18" height="30"/>
         <image name="NSTouchBarListViewTemplate" width="18" height="30"/>
+        <image name="NSTouchBarNewMessageTemplate" width="18" height="30"/>
         <image name="NSTouchBarPauseTemplate" width="11" height="30"/>
         <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
         <image name="NSTouchBarRewindTemplate" width="22" height="30"/>

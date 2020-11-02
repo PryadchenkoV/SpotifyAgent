@@ -9,6 +9,10 @@
 import Cocoa
 import os.log
 
+struct LyricsResponse: Codable {
+  let lyrics: String
+}
+
 class Song: NSObject {
 
     @objc dynamic var name: String
@@ -19,6 +23,7 @@ class Song: NSObject {
     @objc dynamic var isImageLoadingMoreThanTwoSeconds = false
     @objc dynamic var songURL: String
     @objc dynamic var isLastSongPlayedSong: Bool
+    @objc dynamic var lyrics: String?
     
     init(name: String, artist: String, artworkURL: String, songURL: String) {
         self.name = name
@@ -28,6 +33,7 @@ class Song: NSObject {
         self.isLastSongPlayedSong = false
         super.init()
         self.downloadArtwork()
+        self.downloadSongsLyrics(for: artist, name: name)
     }
     
     required init?(coder decoder: NSCoder)
@@ -42,6 +48,7 @@ class Song: NSObject {
         self.isLastSongPlayedSong = isLastSongPlayedSong
         super.init()
         self.downloadArtwork()
+        self.downloadSongsLyrics(for: artist, name: name)
     }
     
     func downloadArtwork() {
@@ -69,6 +76,39 @@ class Song: NSObject {
                 self?.isImageLoadingMoreThanTwoSeconds = true
             }
         }
+    }
+    
+    func downloadSongsLyrics(for artist: String, name: String) {
+        guard let lyricsURL = "https://api.lyrics.ovh/v1/\(artist)/\(name)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: lyricsURL) else {
+            os_log("URL is nil", type: .error)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            if let error = error {
+                os_log("Error while downloading: ", type: .error, error.localizedDescription)
+                return
+            }
+            guard let data = data else {
+                os_log("Data is nil", type: .fault)
+                return
+            }
+            do {
+                let lyricsResponse = try JSONDecoder().decode(LyricsResponse.self, from: data)
+                if lyricsResponse.lyrics != "" {
+                    DispatchQueue.main.async {
+                        self?.lyrics = lyricsResponse.lyrics
+                    }
+                }
+                else if artist.contains(".") {
+                    self?.downloadSongsLyrics(for: artist.replacingOccurrences(of: ".", with: ""), name: name)
+                }
+                else if artist.contains("-") {
+                    self?.downloadSongsLyrics(for: artist.replacingOccurrences(of: "-", with: " "), name: name)
+                }
+            } catch {
+                os_log("Decode Error", type: .fault)
+            }
+        }.resume()
     }
     
     static func != (lhs: Song, rhs: Song) -> Bool {

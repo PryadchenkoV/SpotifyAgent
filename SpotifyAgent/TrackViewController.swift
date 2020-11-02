@@ -28,17 +28,23 @@ class TrackViewController: NSViewController {
     @IBOutlet weak var viewToPlacePopover: NSView!
     @IBOutlet weak var historyViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var historyView: NSView!
+    @IBOutlet weak var lyricsView: NSView!
+    @IBOutlet weak var lyricsViewWidthConstraint: NSLayoutConstraint!
     
     @objc dynamic var isTrackPaused = true
     @objc dynamic var isApplicationInstalled = false
     @objc dynamic var isApplicationRunning = false
     @objc dynamic var isApplicationLaunching = false
     @objc dynamic var isHistoryShown = false
+    @objc dynamic var isLyricsShown = false
     
     @objc dynamic var artworkImage: NSImage?
     
     let songModel = SongModel.shared
     private let historyViewWidth: CGFloat = 150
+    private let lyricsViewWidth: CGFloat = 250
+    
+    private var lyricsViewController: NSViewController?
     
     var timerApplicationInstalled: Timer?
     var timerRenewInformation: Timer?
@@ -90,6 +96,9 @@ class TrackViewController: NSViewController {
         historyViewWidthConstraint.constant = 0
         historyView.isHidden = !isHistoryShown
         
+        lyricsViewWidthConstraint.constant = 0
+        lyricsView.isHidden = !isLyricsShown
+        
         NSApp.mainWindow?.initialFirstResponder = viewToPlacePopover
     }
     
@@ -129,12 +138,20 @@ class TrackViewController: NSViewController {
     override func viewDidDisappear() {
         super.viewDidDisappear()
         isHistoryShown = false
+        isLyricsShown = false
         historyViewWidthConstraint.constant = 0
+        lyricsViewWidthConstraint.constant = 0
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
         observer?.invalidate()
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == "LyricsViewControllerSegue" {
+            lyricsViewController = segue.destinationController as? NSViewController
+        }
     }
 
     func startMonitoringApplication() {
@@ -185,8 +202,9 @@ class TrackViewController: NSViewController {
             DispatchQueue.main.async {
                 if self.representedObject == nil || song == nil {
                     self.representedObject = song
-                    if song != nil {
-                        self.imageObserver = song?.observe(\.isImageLoading, changeHandler: { [weak self] (song, _) in
+                    if let song = song {
+                        SongModel.shared.setCurrentPlayingSong(song)
+                        self.imageObserver = song.observe(\.isImageLoading, changeHandler: { [weak self] (song, _) in
                             if !song.isImageLoading {
                                 self?.artworkImage = song.artwork
                                 self?.imageObserver?.invalidate()
@@ -194,6 +212,7 @@ class TrackViewController: NSViewController {
                         })
                     }
                 } else if let representedObject = self.representedObject as? Song, let songNotNil = song, representedObject != songNotNil {
+                    SongModel.shared.setCurrentPlayingSong(songNotNil)
                     self.representedObject = song
                     self.imageObserver = song?.observe(\.isImageLoading, changeHandler: { [weak self] (song, _) in
                         if !song.isImageLoading {
@@ -201,6 +220,7 @@ class TrackViewController: NSViewController {
                             self?.imageObserver?.invalidate()
                         }
                     })
+                    self.lyricsViewController?.representedObject = self.representedObject
                     self.songModel.addSongToHistory(song: representedObject)
                 }
             }
@@ -285,16 +305,55 @@ class TrackViewController: NSViewController {
         }
     }
     @IBAction func showHistoryPushed(_ sender: Any) {
-        if !isHistoryShown {
-            historyView.isHidden = false
-            historyViewWidthConstraint.constant = 0
+        if isLyricsShown {
+            isLyricsShown.toggle()
+            NSAnimationContext.runAnimationGroup({ (context) in
+                context.duration = 0.2
+                lyricsViewWidthConstraint.animator().constant = isLyricsShown ? self.lyricsViewWidth : 0.0
+            }) {
+                self.lyricsView.isHidden = !self.isLyricsShown
+                self.showHistoryPushed(sender)
+            }
+        } else {
+            
+            if !isHistoryShown {
+                historyView.isHidden = false
+                historyViewWidthConstraint.constant = 0
+            }
+            isHistoryShown.toggle()
+            NSAnimationContext.runAnimationGroup({ (context) in
+                context.duration = 0.2
+                historyViewWidthConstraint.animator().constant = isHistoryShown ? self.historyViewWidth : 0.0
+            }) {
+                self.historyView.isHidden = !self.isHistoryShown
+            }
         }
-        isHistoryShown.toggle()
-        NSAnimationContext.runAnimationGroup({ (context) in
-            context.duration = 0.2
-            historyViewWidthConstraint.animator().constant = isHistoryShown ? self.historyViewWidth : 0.0
-        }) {
-            self.historyView.isHidden = !self.isHistoryShown
+    }
+    
+    @IBAction func showLyricsPushed(_ sender: Any) {
+        
+        if isHistoryShown {
+            isHistoryShown.toggle()
+            NSAnimationContext.runAnimationGroup({ (context) in
+                context.duration = 0.2
+                historyViewWidthConstraint.animator().constant = isHistoryShown ? self.historyViewWidth : 0.0
+            }) {
+                self.historyView.isHidden = !self.isHistoryShown
+                self.showLyricsPushed(sender)
+            }
+        } else {
+            if !isLyricsShown {
+                lyricsView.isHidden = false
+                lyricsViewWidthConstraint.constant = 0
+                lyricsViewController?.representedObject = self.representedObject
+            }
+            isLyricsShown.toggle()
+            NSAnimationContext.runAnimationGroup({ (context) in
+                context.duration = 0.2
+                lyricsViewWidthConstraint.animator().constant = isLyricsShown ? self.lyricsViewWidth : 0.0
+            }) {
+                self.lyricsView.isHidden = !self.isLyricsShown
+            }
         }
     }
 }
