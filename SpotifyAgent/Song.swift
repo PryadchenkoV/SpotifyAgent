@@ -13,6 +13,33 @@ struct LyricsResponse: Codable {
   let lyrics: String
 }
 
+class LastPlayedLyrics: NSObject {
+    @objc dynamic var lyrics: String
+    @objc dynamic var songURL: String
+    
+    init(withLyrics lyrics: String, forSongURL songURL: String) {
+        self.lyrics = lyrics
+        self.songURL = songURL
+        super.init()
+    }
+    
+    required init?(coder decoder: NSCoder) {
+        guard let lyrics = decoder.decodeObject(forKey: "lyrics") as? String, let songURL = decoder.decodeObject(forKey: "songURL") as? String else {
+            fatalError()
+        }
+        self.lyrics = lyrics
+        self.songURL = songURL
+        super.init()
+    }
+}
+
+extension LastPlayedLyrics: NSCoding {
+    func encode(with coder: NSCoder) {
+        coder.encode(self.lyrics, forKey: "lyrics")
+        coder.encode(self.songURL, forKey: "songURL")
+    }
+}
+
 class Song: NSObject {
 
     @objc dynamic var name: String
@@ -23,6 +50,7 @@ class Song: NSObject {
     @objc dynamic var isImageLoadingMoreThanTwoSeconds = false
     @objc dynamic var songURL: String
     @objc dynamic var isLastSongPlayedSong: Bool
+    @objc dynamic var isLyricsLoading = true
     @objc dynamic var lyrics: String?
     
     init(name: String, artist: String, artworkURL: String, songURL: String) {
@@ -33,7 +61,18 @@ class Song: NSObject {
         self.isLastSongPlayedSong = false
         super.init()
         self.downloadArtwork()
-        self.downloadSongsLyrics(for: artist, name: name)
+        self.downloadSongLyrics()
+    }
+    
+    init(name: String, artist: String, artworkURL: String, songURL: String, lyrics: String) {
+        self.name = name
+        self.artist = artist
+        self.artworkURL = artworkURL
+        self.songURL = songURL
+        self.isLastSongPlayedSong = false
+        self.lyrics = lyrics
+        super.init()
+        self.downloadArtwork()
     }
     
     required init?(coder decoder: NSCoder)
@@ -48,10 +87,13 @@ class Song: NSObject {
         self.isLastSongPlayedSong = isLastSongPlayedSong
         super.init()
         self.downloadArtwork()
-        self.downloadSongsLyrics(for: artist, name: name)
+        self.downloadSongLyrics()
     }
     
     func downloadArtwork() {
+        if artwork != nil {
+            os_log("Artwork already downloaded for %{public}@ - %{public}@", name, artist)
+        }
         guard let url = URL(string: artworkURL) else {
             os_log("URL is nil", type: .error)
             return
@@ -78,8 +120,16 @@ class Song: NSObject {
         }
     }
     
-    func downloadSongsLyrics(for artist: String, name: String) {
-        guard let lyricsURL = "https://api.lyrics.ovh/v1/\(artist)/\(name)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: lyricsURL) else {
+    func downloadSongLyrics() {
+        downloadSongLyrics(for: artist, name: name)
+    }
+    
+    func downloadSongLyrics(for artist: String, name: String) {
+        if let lyrics = lyrics, lyrics.count > 0 {
+            os_log("Lyrics already downloaded for %{public}@ - %{public}@", name, artist)
+            return
+        }
+        guard let artist = artist.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let name = name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let lyricsURL = "https://api.lyrics.ovh/v1/\(artist)/\(name)" as? String, let url = URL(string: lyricsURL) else {
             os_log("URL is nil", type: .error)
             return
         }
@@ -97,13 +147,14 @@ class Song: NSObject {
                 if lyricsResponse.lyrics != "" {
                     DispatchQueue.main.async {
                         self?.lyrics = lyricsResponse.lyrics
+                        self?.isLyricsLoading = false
                     }
                 }
                 else if artist.contains(".") {
-                    self?.downloadSongsLyrics(for: artist.replacingOccurrences(of: ".", with: ""), name: name)
+                    self?.downloadSongLyrics(for: artist.replacingOccurrences(of: ".", with: ""), name: name)
                 }
                 else if artist.contains("-") {
-                    self?.downloadSongsLyrics(for: artist.replacingOccurrences(of: "-", with: " "), name: name)
+                    self?.downloadSongLyrics(for: artist.replacingOccurrences(of: "-", with: " "), name: name)
                 }
             } catch {
                 os_log("Decode Error", type: .fault)

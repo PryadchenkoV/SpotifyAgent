@@ -44,7 +44,7 @@ class TrackViewController: NSViewController {
     private let historyViewWidth: CGFloat = 150
     private let lyricsViewWidth: CGFloat = 250
     
-    private var lyricsViewController: NSViewController?
+    private var lyricsViewController: LyricsViewController?
     
     var timerApplicationInstalled: Timer?
     var timerRenewInformation: Timer?
@@ -52,6 +52,7 @@ class TrackViewController: NSViewController {
     
     var observer: NSKeyValueObservation?
     var imageObserver: NSKeyValueObservation?
+    var lyricsObserver: NSKeyValueObservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,7 +151,7 @@ class TrackViewController: NSViewController {
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier == "LyricsViewControllerSegue" {
-            lyricsViewController = segue.destinationController as? NSViewController
+            lyricsViewController = segue.destinationController as? LyricsViewController
         }
     }
 
@@ -197,22 +198,39 @@ class TrackViewController: NSViewController {
                     os_log(.error, "Some of components is nil")
                     return
                 }
-                song = Song(name: name, artist: artist, artworkURL: artworkURL, songURL: songURL)
+                
+                if let lastPlayedLyrics = self.songModel.lastPlayedLyrics, lastPlayedLyrics.songURL == songURL {
+                    song = Song(name: name, artist: artist, artworkURL: artworkURL, songURL: songURL, lyrics: lastPlayedLyrics.lyrics)
+                } else {
+                    song = Song(name: name, artist: artist, artworkURL: artworkURL, songURL: songURL)
+                }
             }
             DispatchQueue.main.async {
                 if self.representedObject == nil || song == nil {
-                    self.representedObject = song
                     if let song = song {
-                        SongModel.shared.setCurrentPlayingSong(song)
                         self.imageObserver = song.observe(\.isImageLoading, changeHandler: { [weak self] (song, _) in
                             if !song.isImageLoading {
                                 self?.artworkImage = song.artwork
+                                SongModel.shared.currentPlayingSong = song
                                 self?.imageObserver?.invalidate()
                             }
                         })
+                        if song.lyrics?.count == 0 || song.lyrics == nil {
+                            self.lyricsObserver = song.observe(\.isLyricsLoading, changeHandler: { [weak self] (song, _) in
+                                if !song.isLyricsLoading {
+                                    self?.lyricsViewController?.lyrics = song.lyrics
+                                    SongModel.shared.currentPlayingSong = song
+                                    if song.lyrics != nil {
+                                        self?.lyricsObserver?.invalidate()
+                                    }
+                                }
+                            })
+                        } else {
+                            self.lyricsViewController?.lyrics = song.lyrics
+                        }
                     }
+                    self.representedObject = song
                 } else if let representedObject = self.representedObject as? Song, let songNotNil = song, representedObject != songNotNil {
-                    SongModel.shared.setCurrentPlayingSong(songNotNil)
                     self.representedObject = song
                     self.imageObserver = song?.observe(\.isImageLoading, changeHandler: { [weak self] (song, _) in
                         if !song.isImageLoading {
@@ -220,7 +238,19 @@ class TrackViewController: NSViewController {
                             self?.imageObserver?.invalidate()
                         }
                     })
-                    self.lyricsViewController?.representedObject = self.representedObject
+                    if song?.lyrics?.count == 0 || song?.lyrics == nil {
+                        self.lyricsObserver = song?.observe(\.isLyricsLoading, changeHandler: { [weak self] (song, _) in
+                            if !song.isLyricsLoading {
+                                self?.lyricsViewController?.lyrics = song.lyrics
+                                if let lyrics = song.lyrics {
+                                    SongModel.shared.lastPlayedLyrics = LastPlayedLyrics(withLyrics: lyrics, forSongURL: song.songURL)
+                                    self?.lyricsObserver?.invalidate()
+                                }
+                            }
+                        })
+                    } else {
+                        self.lyricsViewController?.lyrics = song?.lyrics
+                    }
                     self.songModel.addSongToHistory(song: representedObject)
                 }
             }
@@ -322,7 +352,7 @@ class TrackViewController: NSViewController {
             }
             isHistoryShown.toggle()
             NSAnimationContext.runAnimationGroup({ (context) in
-                context.duration = 0.2
+                context.duration = 0.3
                 historyViewWidthConstraint.animator().constant = isHistoryShown ? self.historyViewWidth : 0.0
             }) {
                 self.historyView.isHidden = !self.isHistoryShown
@@ -349,7 +379,7 @@ class TrackViewController: NSViewController {
             }
             isLyricsShown.toggle()
             NSAnimationContext.runAnimationGroup({ (context) in
-                context.duration = 0.2
+                context.duration = 0.3
                 lyricsViewWidthConstraint.animator().constant = isLyricsShown ? self.lyricsViewWidth : 0.0
             }) {
                 self.lyricsView.isHidden = !self.isLyricsShown
